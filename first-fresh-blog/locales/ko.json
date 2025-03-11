@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "홈",
+    "projects": "프로젝트",
+    "blog": "블로그",
+    "about": "소개",
+    "contact": "연락하기"
+  },
+  "hero": {
+    "badge": "개발자 & 디자이너",
+    "greeting": "안녕하세요,",
+    "welcome": "포트폴리오와 블로그에 오신 것을 환영합니다",
+    "description": "웹 개발, 디자인, 그리고 창의적인 프로젝트에 대한 저의 여정을 공유합니다. 최신 기술 스택과 디자인 트렌드를 활용한 작업물을 확인해보세요.",
+    "cta": {
+      "projects": "프로젝트 보기",
+      "blog": "블로그 읽기",
+      "write": "글 작성하기"
+    }
+  },
+  "techStack": {
+    "badge": "기술 스택",
+    "title": "기술 스택",
+    "description": "프로젝트에서 사용하는 주요 기술과 도구들입니다"
+  },
+  "projects": {
+    "badge": "프로젝트",
+    "title": "주요 프로젝트",
+    "description": "최근에 작업한 주요 프로젝트들입니다",
+    "viewAll": "모든 프로젝트 보기",
+    "custom": {
+      "title": "맞춤형 프로젝트가 필요하신가요?",
+      "description": "다양한 기술 스택과 경험을 바탕으로 귀하의 비즈니스에 맞는 맞춤형 솔루션을 제공해 드립니다.",
+      "cta": "문의하기"
+    }
+  },
+  "blog": {
+    "badge": "블로그",
+    "title": "최근 블로그 포스트",
+    "description": "개발, 디자인, 그리고 창의적인 생각들에 대한 이야기",
+    "viewAll": "모든 포스트 보기",
+    "readingTime": "분 읽기"
+  },
+  "newsletter": {
+    "badge": "최신 소식",
+    "title": "최신 개발 트렌드를 놓치지 마세요",
+    "description": "새로운 블로그 포스트와 프로젝트 소식을 가장 먼저 받아보세요. 스팸은 보내지 않으며, 언제든지 구독을 취소할 수 있습니다.",
+    "form": {
+      "name": "이름",
+      "namePlaceholder": "홍길동",
+      "email": "이메일",
+      "emailPlaceholder": "hello@example.com",
+      "subscribe": "구독하기"
+    }
+  },
+  "footer": {
+    "description": "웹 개발, 디자인, 그리고 창의적인 프로젝트에 대한 저의 여정을 공유합니다.",
+    "links": "바로가기",
+    "blogPosts": "블로그",
+    "newsletter": "뉴스레터",
+    "newsletterDescription": "최신 프로젝트와 블로그 포스트 소식을 받아보세요.",
+    "copyright": "모든 권리 보유.",
+    "madeWith": "제작"
+  },
+  "techStacks": [
+    {
+      "name": "프론트엔드",
+      "description": "React, Vue, Svelte를 활용한 모던 UI 개발"
+    },
+    {
+      "name": "백엔드",
+      "description": "Node.js, Express, Django를 이용한 서버 개발"
+    },
+    {
+      "name": "디자인",
+      "description": "Figma, Adobe XD를 활용한 UI/UX 디자인"
+    },
+    {
+      "name": "데이터베이스",
+      "description": "MongoDB, PostgreSQL, Firebase를 활용한 데이터 관리"
+    },
+    {
+      "name": "DevOps",
+      "description": "Docker, AWS, Vercel을 활용한 배포 및 운영"
+    },
+    {
+      "name": "모바일",
+      "description": "React Native, Flutter를 활용한 모바일 앱 개발"
+    },
+    {
+      "name": "테스팅",
+      "description": "Jest, Cypress를 활용한 테스트 자동화"
+    },
+    {
+      "name": "콘텐츠",
+      "description": "Markdown, CMS를 활용한 콘텐츠 관리"
+    }
+  ]
+}
+

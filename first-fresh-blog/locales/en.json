@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "Home",
+    "projects": "Projects",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Developer & Designer",
+    "greeting": "Hello,",
+    "welcome": "Welcome to my portfolio and blog",
+    "description": "I share my journey in web development, design, and creative projects. Check out my work using the latest tech stacks and design trends.",
+    "cta": {
+      "projects": "View Projects",
+      "blog": "Read Blog",
+      "write": "Write a Post"
+    }
+  },
+  "techStack": {
+    "badge": "TECH STACK",
+    "title": "Technology Stack",
+    "description": "Main technologies and tools used in my projects"
+  },
+  "projects": {
+    "badge": "PROJECTS",
+    "title": "Featured Projects",
+    "description": "Recent major projects I've worked on",
+    "viewAll": "View All Projects",
+    "custom": {
+      "title": "Need a custom project?",
+      "description": "I provide tailored solutions for your business based on various tech stacks and experience.",
+      "cta": "Contact Me"
+    }
+  },
+  "blog": {
+    "badge": "BLOG",
+    "title": "Recent Blog Posts",
+    "description": "Stories about development, design, and creative thinking",
+    "viewAll": "View All Posts",
+    "readingTime": "min read"
+  },
+  "newsletter": {
+    "badge": "STAY UPDATED",
+    "title": "Don't miss the latest development trends",
+    "description": "Be the first to receive new blog posts and project news. No spam, and you can unsubscribe anytime.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "John Doe",
+      "email": "Email",
+      "emailPlaceholder": "hello@example.com",
+      "subscribe": "Subscribe"
+    }
+  },
+  "footer": {
+    "description": "I share my journey in web development, design, and creative projects.",
+    "links": "Quick Links",
+    "blogPosts": "Blog",
+    "newsletter": "Newsletter",
+    "newsletterDescription": "Get the latest project and blog post news.",
+    "copyright": "All rights reserved.",
+    "madeWith": "Made with"
+  },
+  "techStacks": [
+    {
+      "name": "Frontend",
+      "description": "Modern UI development with React, Vue, and Svelte"
+    },
+    {
+      "name": "Backend",
+      "description": "Server development with Node.js, Express, and Django"
+    },
+    {
+      "name": "Design",
+      "description": "UI/UX design with Figma and Adobe XD"
+    },
+    {
+      "name": "Database",
+      "description": "Data management with MongoDB, PostgreSQL, and Firebase"
+    },
+    {
+      "name": "DevOps",
+      "description": "Deployment and operations with Docker, AWS, and Vercel"
+    },
+    {
+      "name": "Mobile",
+      "description": "Mobile app development with React Native and Flutter"
+    },
+    {
+      "name": "Testing",
+      "description": "Test automation with Jest and Cypress"
+    },
+    {
+      "name": "Content",
+      "description": "Content management with Markdown and CMS"
+    }
+  ]
+}
+

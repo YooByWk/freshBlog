@@ -1,0 +1,99 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "projects": "Proyectos",
+    "blog": "Blog",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "badge": "Desarrollador & Diseñador",
+    "greeting": "Hola,",
+    "welcome": "Bienvenido a mi portafolio y blog",
+    "description": "Comparto mi trayectoria en desarrollo web, diseño y proyectos creativos. Descubre mi trabajo utilizando las últimas tecnologías y tendencias de diseño.",
+    "cta": {
+      "projects": "Ver Proyectos",
+      "blog": "Leer Blog",
+      "write": "Escribir Artículo"
+    }
+  },
+  "techStack": {
+    "badge": "TECNOLOGÍAS",
+    "title": "Stack Tecnológico",
+    "description": "Principales tecnologías y herramientas utilizadas en mis proyectos"
+  },
+  "projects": {
+    "badge": "PROYECTOS",
+    "title": "Proyectos Destacados",
+    "description": "Proyectos importantes en los que he trabajado recientemente",
+    "viewAll": "Ver Todos los Proyectos",
+    "custom": {
+      "title": "¿Necesitas un proyecto personalizado?",
+      "description": "Proporciono soluciones a medida para tu negocio basadas en diversas tecnologías y experiencia.",
+      "cta": "Contáctame"
+    }
+  },
+  "blog": {
+    "badge": "BLOG",
+    "title": "Artículos Recientes",
+    "description": "Historias sobre desarrollo, diseño y pensamiento creativo",
+    "viewAll": "Ver Todos los Artículos",
+    "readingTime": "min de lectura"
+  },
+  "newsletter": {
+    "badge": "MANTENTE ACTUALIZADO",
+    "title": "No te pierdas las últimas tendencias de desarrollo",
+    "description": "Sé el primero en recibir nuevos artículos y noticias de proyectos. Sin spam, y puedes darte de baja en cualquier momento.",
+    "form": {
+      "name": "Nombre",
+      "namePlaceholder": "Juan Pérez",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "hola@ejemplo.com",
+      "subscribe": "Suscribirse"
+    }
+  },
+  "footer": {
+    "description": "Comparto mi trayectoria en desarrollo web, diseño y proyectos creativos.",
+    "links": "Enlaces Rápidos",
+    "blogPosts": "Blog",
+    "newsletter": "Boletín",
+    "newsletterDescription": "Recibe las últimas noticias de proyectos y artículos del blog.",
+    "copyright": "Todos los derechos reservados.",
+    "madeWith": "Hecho con"
+  },
+  "techStacks": [
+    {
+      "name": "Frontend",
+      "description": "Desarrollo de UI modernas con React, Vue y Svelte"
+    },
+    {
+      "name": "Backend",
+      "description": "Desarrollo de servidores con Node.js, Express y Django"
+    },
+    {
+      "name": "Diseño",
+      "description": "Diseño UI/UX con Figma y Adobe XD"
+    },
+    {
+      "name": "Base de datos",
+      "description": "Gestión de datos con MongoDB, PostgreSQL y Firebase"
+    },
+    {
+      "name": "DevOps",
+      "description": "Despliegue y operaciones con Docker, AWS y Vercel"
+    },
+    {
+      "name": "Móvil",
+      "description": "Desarrollo de aplicaciones móviles con React Native y Flutter"
+    },
+    {
+      "name": "Testing",
+      "description": "Automatización de pruebas con Jest y Cypress"
+    },
+    {
+      "name": "Contenido",
+      "description": "Gestión de contenido con Markdown y CMS"
+    }
+  ]
+}
+
