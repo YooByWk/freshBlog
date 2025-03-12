@@ -61,7 +61,7 @@ const HeaderInfo = ({ active, navContent }: HeaderProps) => {
         href="/contact"
         class="inline-flex items-center rounded-full bg-gradient-to-r from-warm-400 to-warm-600 dark:from-pink-500 dark:to-purple-600 px-4 py-2 text-sm font-medium text-white hover:shadow-lg hover:shadow-warm-500/25 dark:hover:shadow-pink-500/25 transition-all duration-300"
       >
-        {navContent.contact} {navContent.about}
+        {navContent.contact}
       </a>
     </nav>
   );
