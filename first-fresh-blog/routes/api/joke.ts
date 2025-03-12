@@ -19,3 +19,8 @@ export const handler = (_req: Request, _ctx: FreshContext): Response => {
   const body = JOKES[randomIndex];
   return new Response(body);
 };
+
+export const testHandler = (text: string) => {
+  console.log(text);
+  return text;
+};

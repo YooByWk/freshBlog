@@ -1,11 +1,4 @@
 {
-  "nav": {
-    "home": "Home",
-    "projects": "Projects",
-    "blog": "Blog",
-    "about": "About",
-    "contact": "Contact"
-  },
   "hero": {
     "badge": "Developer & Designer",
     "greeting": "Hello,",
@@ -96,4 +89,3 @@
     }
   ]
 }
-
