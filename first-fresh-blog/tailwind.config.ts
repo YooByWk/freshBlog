@@ -20,8 +20,8 @@ export default {
       },
       colors: {
         border: "hsl(var(--border))",
-        "deno-bg": "#86efac",
-        "deno-text": "#404559",
+        "fresh-bg": "#86efac",
+        "fresh-text": "#404559",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

@@ -175,7 +175,7 @@ body {
 /* */
 
 :root {
-  /* 베이지 & 브라운 색상 - 더 부드럽고 균일한 톤 */
+  --fresh-bg: #86efac; /* 베이지 & 브라운 색상 - 더 부드럽고 균일한 톤 */
   --beige-50: 35 25% 98%;
   --beige-100: 35 25% 94%;
   --beige-200: 35 20% 88%;
@@ -215,16 +215,24 @@ body {
   --neutral-950: 30 10% 10%;
 }
 
-
 :root {
   --card-bg: 35 25% 98%;
   --card-border: 30 15% 85%;
   --card-hover-border: 25 70% 50%;
   --card-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.03);
-  --card-hover-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+  --card-hover-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.02), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
 
-  --button-primary-bg: linear-gradient(to right, hsl(25, 70%, 50%), hsl(15, 60%, 45%));
-  --button-primary-hover-bg: linear-gradient(to right, hsl(25, 70%, 45%), hsl(15, 60%, 40%));
+  --button-primary-bg: linear-gradient(
+    to right,
+    hsl(25, 70%, 50%),
+    hsl(15, 60%, 45%)
+  );
+  --button-primary-hover-bg: linear-gradient(
+    to right,
+    hsl(25, 70%, 45%),
+    hsl(15, 60%, 40%)
+  );
   --button-secondary-bg: hsl(30, 15%, 90%);
   --button-secondary-hover-bg: hsl(30, 15%, 85%);
   --button-secondary-text: hsl(20, 15%, 25%);
@@ -246,11 +254,21 @@ body {
   --card-bg: 240 4% 16%;
   --card-border: 240 5% 26%;
   --card-hover-border: 325 90% 66%;
-  --card-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 1px 3px rgba(0, 0, 0, 0.3);
-  --card-hover-shadow: 0 0 0 1px rgba(255, 255, 255, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  --card-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --card-hover-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.3);
 
-  --button-primary-bg: linear-gradient(to right, hsl(330, 81%, 60%), hsl(271, 81%, 56%));
-  --button-primary-hover-bg: linear-gradient(to right, hsl(330, 81%, 65%), hsl(271, 81%, 61%));
+  --button-primary-bg: linear-gradient(
+    to right,
+    hsl(330, 81%, 60%),
+    hsl(271, 81%, 56%)
+  );
+  --button-primary-hover-bg: linear-gradient(
+    to right,
+    hsl(330, 81%, 65%),
+    hsl(271, 81%, 61%)
+  );
   --button-secondary-bg: hsl(240, 5%, 26%);
   --button-secondary-hover-bg: hsl(240, 4%, 16%);
   --button-secondary-text: hsl(0, 0%, 98%);

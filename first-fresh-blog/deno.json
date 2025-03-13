@@ -21,6 +21,7 @@
     "preact/hooks": "npm:preact@10.22.1/hooks",
     "@preact/signals": "npm:@preact/signals@1.2.2",
     "@preact/signals-core": "npm:@preact/signals-core@1.5.1",
+    "tailwind-merge": "npm:tailwind-merge@^3.0.2",
     "tailwindcss": "npm:tailwindcss@3.4.1",
     "tailwindcss/": "npm:tailwindcss@3.4.1/",
     "tailwindcss-animate": "npm:tailwindcss-animate@^1.0.7",
