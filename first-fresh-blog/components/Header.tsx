@@ -1,7 +1,8 @@
 import type { JSX } from "preact";
 import { LanguageSwitch } from "../islands/LanguageSwitch.tsx";
 import { ThemeToggle } from "../islands/ThemeToggle.tsx";
-import { navContentType } from "./HomeComponent.tsx";
+import { navContentType } from "../locales/locales.ts";
+import { Button } from "./Button.tsx";
 
 interface HeaderProps {
   active: string;
@@ -68,9 +69,7 @@ const HeaderInfo = ({ active, navContent }: HeaderProps) => {
 };
 
 // 헤더 컴포넌트
-
 export function Header({ active, navContent }: HeaderProps): JSX.Element {
-  console.log(navContent.about);
   return (
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -78,14 +77,17 @@ export function Header({ active, navContent }: HeaderProps): JSX.Element {
           {/* 로고 */}
           <a href="/" class="flex items-center">
             <span class="text-xl font-bold text-beige-900 dark:text-white">
-              Portfolio<span class="text-warm-600 dark:text-pink-500">.</span>
+              Banger Direct
+              <span class="pl-2 text-warm-600 dark:text-pink-500">
+                @
+              </span>
             </span>
           </a>
 
           {/* 데스크탑 메뉴 */}
           <HeaderInfo active={active} navContent={navContent} />
           {/* 모바일 메뉴 버튼 */}
-          <button
+          <Button
             class="md:hidden text-beige-700 hover:text-beige-900 dark:text-zinc-400 dark:hover:text-white"
             id="mobile-menu-button"
           >
@@ -104,7 +106,7 @@ export function Header({ active, navContent }: HeaderProps): JSX.Element {
               <line x1="3" y1="6" x2="21" y2="6"></line>
               <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
-          </button>
+          </Button>
         </div>
       </div>
 
