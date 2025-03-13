@@ -1,15 +1,4 @@
 {
-  "hero": {
-    "badge": "Developer & Designer",
-    "greeting": "Hello,",
-    "welcome": "Welcome to my portfolio and blog",
-    "description": "I share my journey in web development, design, and creative projects. Check out my work using the latest tech stacks and design trends.",
-    "cta": {
-      "projects": "View Projects",
-      "blog": "Read Blog",
-      "write": "Write a Post"
-    }
-  },
   "techStack": {
     "badge": "TECH STACK",
     "title": "Technology Stack",

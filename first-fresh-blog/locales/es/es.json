@@ -1,22 +1,4 @@
 {
-  "nav": {
-    "home": "Inicio",
-    "projects": "Proyectos",
-    "blog": "Blog",
-    "about": "Acerca de",
-    "contact": "Contacto"
-  },
-  "hero": {
-    "badge": "Desarrollador & Diseñador",
-    "greeting": "Hola,",
-    "welcome": "Bienvenido a mi portafolio y blog",
-    "description": "Comparto mi trayectoria en desarrollo web, diseño y proyectos creativos. Descubre mi trabajo utilizando las últimas tecnologías y tendencias de diseño.",
-    "cta": {
-      "projects": "Ver Proyectos",
-      "blog": "Leer Blog",
-      "write": "Escribir Artículo"
-    }
-  },
   "techStack": {
     "badge": "TECNOLOGÍAS",
     "title": "Stack Tecnológico",
@@ -96,4 +78,3 @@
     }
   ]
 }
-

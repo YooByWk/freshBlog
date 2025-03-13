@@ -1,0 +1,15 @@
+{
+  "badge": "Developer ",
+  "greeting": "Alright, mate",
+  "welcome": "Welcome to my portfolio and blog",
+  "tag1": "Node.js Fullstack",
+  "tag2": "Deno Fullstack(Fancy that, wouldn't it?)",
+  "tag3": "Blockchain",
+  "description": "I'm sharing my jolly good adventure in web development and projects.",
+  "description2": "Do have a look at my creations, made with the latest tech and a good dollop of elbow grease.",
+  "cta": {
+    "projects": "My projects",
+    "blog": "Have a read of my blog",
+    "write": "Pen a post"
+  }
+}

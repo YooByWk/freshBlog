@@ -1,0 +1,15 @@
+{
+  "badge": "Desarrollador",
+  "greeting": "¡Qué onda!",
+  "welcome": "Bienvenido a mi portafolio y blog",
+  "tag1": "Node.js Fullstack",
+  "tag2": "Deno Fullstack (¡Sí, en eso ando!)",
+  "tag3": "Blockchain",
+  "description": "Les cuento mi odisea en el mundo del desarrollo web y mis proyectos.",
+  "description2": "¡Miren mis laburos, hechos con la última tecnología y un montón de garra!",
+  "cta": {
+    "projects": "Ver mis proyectos",
+    "blog": "Leer mi blog",
+    "write": "Manden un posteo :)"
+  }
+}
