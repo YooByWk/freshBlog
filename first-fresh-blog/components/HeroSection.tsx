@@ -8,12 +8,12 @@ import {
 import BorderedTag from "./BorderedTag.tsx";
 import { heroContentType } from "../locales/locales.ts";
 
-interface HeroContentProps {
+interface HeroSectionProps {
   heroContent: heroContentType;
   active: string;
 }
 
-export function HeroSection({ heroContent, active }: HeroContentProps) {
+export function HeroSection({ heroContent, active }: HeroSectionProps) {
   return (
     <section class="relative overflow-hidden py-20 sm:py-32">
       {/* 비정형 배경 요소들 */}
@@ -206,11 +206,12 @@ export function HeroSection({ heroContent, active }: HeroContentProps) {
               </div>
               <div class="relative bg-beige-100 dark:bg-zinc-800 border border-beige-300/50 dark:border-zinc-700/50 rounded-2xl overflow-hidden shadow-2xl transform hover:scale-[1.01] transition-transform duration-300">
                 <img
-                  src="/ava.png"
+                  // src="/me.jpg"
+                  src="/back.png"
                   alt="Portfolio Preview"
                   width="500"
                   height="500"
-                  class="w-full h-auto"
+                  class="w-full h-auto dark:bg-fresh-bg/90 bg-beige-300"
                 />
                 <div class="absolute inset-0 bg-gradient-to-t from-beige-900/200 dark:from-zinc-900 via-transparent to-transparent opacity-20">
                 </div>

@@ -1,0 +1,47 @@
+{
+  "badge": "Tech Stack",
+  "title": "Tech Stack",
+  "description": "These are the main technologies and tools used in the projects.",
+  "techStacks": [
+    {
+      "name": "Frontend",
+      "description": "Web development using React, Vue, and Fresh.",
+      "icon": "fe"
+    },
+    {
+      "name": "Backend",
+      "description": "Server development with Node.js, Express, and Django.",
+      "icon": "be"
+    },
+    {
+      "name": "Blockchain",
+      "description": "Smart contract development with Solidity and Web3.js.",
+      "icon": "link"
+    },
+    {
+      "name": "Database",
+      "description": "Data management with MongoDB, PostgreSQL, and Firebase.",
+      "icon": "db"
+    },
+    {
+      "name": "DevOps",
+      "description": "Deployment and operation with Docker, AWS, and Vercel.",
+      "icon": "git"
+    },
+    {
+      "name": "API",
+      "description": "RESTful and GraphQL API development.",
+      "icon": "plug"
+    },
+    {
+      "name": "Testing",
+      "description": "Test automation with Jest and Cypress.",
+      "icon": "bug"
+    },
+    {
+      "name": "Content",
+      "description": "Content management with Markdown and CMS.",
+      "icon": "file"
+    }
+  ]
+}

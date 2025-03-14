@@ -1,0 +1,47 @@
+{
+  "badge": "Pila de tecnologías",
+  "title": "Pila de tecnologías",
+  "description": "Estas son las principales tecnologías y herramientas utilizadas en los proyectos.",
+  "techStacks": [
+    {
+      "name": "Frontend",
+      "description": "Desarrollo web utilizando React, Vue y Fresh.",
+      "icon": "fe"
+    },
+    {
+      "name": "Backend",
+      "description": "Desarrollo de servidores con Node.js, Express y Django.",
+      "icon": "be"
+    },
+    {
+      "name": "Blockchain",
+      "description": "Desarrollo de contratos inteligentes con Solidity y Web3.js.",
+      "icon": "link"
+    },
+    {
+      "name": "Base de datos",
+      "description": "Gestión de datos con MongoDB, PostgreSQL y Firebase.",
+      "icon": "db"
+    },
+    {
+      "name": "DevOps",
+      "description": "Despliegue y operación con Docker, AWS y Vercel.",
+      "icon": "git"
+    },
+    {
+      "name": "API",
+      "description": "Desarrollo de API RESTful y GraphQL.",
+      "icon": "plug"
+    },
+    {
+      "name": "Pruebas",
+      "description": "Automatización de pruebas con Jest y Cypress.",
+      "icon": "bug"
+    },
+    {
+      "name": "Contenido",
+      "description": "Gestión de contenido con Markdown y CMS.",
+      "icon": "file"
+    }
+  ]
+}

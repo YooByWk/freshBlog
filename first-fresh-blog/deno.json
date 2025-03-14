@@ -1,4 +1,6 @@
 {
+  "version": "1.1.0",
+  "name": "@freshblog/yoobywk",
   "lock": false,
   "tasks": {
     "check": "deno fmt --check && deno lint && deno check **/*.ts && deno check **/*.tsx",

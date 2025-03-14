@@ -1,9 +1,4 @@
 {
-  "techStack": {
-    "badge": "기술 스택",
-    "title": "기술 스택",
-    "description": "프로젝트에서 사용하는 주요 기술과 도구들입니다"
-  },
   "projects": {
     "badge": "프로젝트",
     "title": "주요 프로젝트",

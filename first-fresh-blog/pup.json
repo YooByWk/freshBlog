@@ -1,0 +1,9 @@
+{
+  "processes": [
+    {
+      "id": "my-server",
+      "cmd": "deno run -A main.ts",
+      "autostart": true
+    }
+  ]
+}

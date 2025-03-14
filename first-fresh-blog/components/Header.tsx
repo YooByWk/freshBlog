@@ -71,7 +71,7 @@ const HeaderInfo = ({ active, navContent }: HeaderProps) => {
 // 헤더 컴포넌트
 export function Header({ active, navContent }: HeaderProps): JSX.Element {
   return (
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent">
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300  opacity-90 dark:bg-black/80 bg-white/90">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-16">
           {/* 로고 */}

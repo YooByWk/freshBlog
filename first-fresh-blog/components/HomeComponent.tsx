@@ -3,6 +3,7 @@ import { Header } from "../components/Header.tsx";
 import { localesContentsType } from "../locales/locales.ts";
 
 import { HeroSection } from "./HeroSection.tsx";
+import TechStackSection from "./TechStackSection.tsx";
 
 interface Props {
   active: string;
@@ -14,7 +15,7 @@ export default function HomeComponent({ active, contents }: Props) {
     <>
       <Header active={active} navContent={contents.navContent} />
       <HeroSection active={active} heroContent={contents.heroContent} />
-      <></> {/* 기술스택 */}
+      <TechStackSection active={active} techContent={contents.techContent} />
       <></> {/* 프로젝트 */}
       <></> {/* 블로그 */}
     </>

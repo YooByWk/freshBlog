@@ -1,9 +1,4 @@
 {
-  "techStack": {
-    "badge": "TECH STACK",
-    "title": "Technology Stack",
-    "description": "Main technologies and tools used in my projects"
-  },
   "projects": {
     "badge": "PROJECTS",
     "title": "Featured Projects",
