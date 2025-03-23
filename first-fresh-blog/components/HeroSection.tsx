@@ -15,7 +15,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ heroContent, active }: HeroSectionProps) {
   return (
-    <section class="relative overflow-hidden py-20 sm:py-32">
+    <section class="flex items-center justify-center relative overflow-hidden py-20 sm:py-32 h-screen">
       {/* 비정형 배경 요소들 */}
 
       <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
@@ -38,7 +38,7 @@ export function HeroSection({ heroContent, active }: HeroSectionProps) {
       </div>
 
       <div
-        class="container mx-auto px-4 sm:px-6 lg:px-8 z-10"
+        class="container mx-auto px-4 pt-28  sm:px-6 lg:px-8 z-10"
         style="min-height:73vh"
       >
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ">
@@ -135,33 +135,30 @@ export function HeroSection({ heroContent, active }: HeroSectionProps) {
               <a
                 href="/"
                 class={`z-10 px-3 py-1 rounded-full 
-                  ${
-                  active === "/" || active === "/ko"
+                  ${active === "/" || active === "/ko"
                     ? "bg-warm-500/20 text-warm-700 dark:bg-pink-500/20 dark:text-pink-400 font-medium"
                     : "hover:bg-warm-500/10 text-beige-700 dark:text-zinc-400 hover:text-warm-700 dark:hover:text-pink-400"
-                }`}
+                  }`}
               >
                 🇰🇷 한국어
               </a>
               <a
                 href="/en"
                 class={`z-10 px-3 py-1 rounded-full 
-                  ${
-                  active === "/en"
+                  ${active === "/en"
                     ? "bg-warm-500/20 text-warm-700 dark:bg-pink-500/20 dark:text-pink-400 font-medium"
                     : "hover:bg-warm-500/10 text-beige-700 dark:text-zinc-400 hover:text-warm-700 dark:hover:text-pink-400"
-                }`}
+                  }`}
               >
                 🇺🇸 English
               </a>
               <a
                 href="/es"
                 class={`z-10 px-3 py-1 rounded-full 
-                ${
-                  active === "/es"
+                ${active === "/es"
                     ? "bg-warm-500/20 text-warm-700 dark:bg-pink-500/20 dark:text-pink-400 font-medium"
                     : "hover:bg-warm-500/10 text-beige-700 dark:text-zinc-400 hover:text-warm-700 dark:hover:text-pink-400"
-                }`}
+                  }`}
               >
                 🇪🇸 Español
               </a>

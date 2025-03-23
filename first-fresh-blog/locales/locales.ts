@@ -47,4 +47,31 @@ export type localesContentsType = {
   navContent: navContentType;
   heroContent: heroContentType;
   techContent: techContentType;
+  projectContent: projectContentType;
+};
+
+// project
+import koProject from "../locales/ko/project.json" with { type: 'json'};
+import esProject from "../locales/es/project.json" with { type: 'json'};
+import enProject from "../locales/en/project.json" with { type: 'json'};
+
+/// exports
+export type projectContentType = typeof koProject;
+export const procjectContentRecord: Record<string, projectContentType> = {
+  "/": koProject,
+  "/ko": koProject,
+  "/en": enProject,
+  "/es": esProject,
+};
+
+import { koProjects } from "./ko/myPjt.ts";
+import { esProjects } from "./es/myPjt.ts";
+import { enProjects } from "./en/myPjt.ts";
+import { TProject } from "../types/project.ts";
+
+export const projectDetailRecord: Record<string, TProject[]> = {
+  "/": koProjects,
+  "/ko": koProjects,
+  "/en": enProjects,
+  "/es": esProjects,
 };
