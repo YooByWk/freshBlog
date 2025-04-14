@@ -1,7 +1,9 @@
 {
   "lint": {
     "rules": {
-      "exclude": ["require-await"]
+      "exclude": [
+        "require-await"
+      ]
     }
   },
   "fmt": {
@@ -23,7 +25,7 @@
     "@std/testing": "jsr:@std/testing@1.0.3"
   },
   "tasks": {
-    "start": "deno run --allow-net --allow-read --unstable --allow-env --watch run.ts",
+    "launch-server": "deno run --allow-net --allow-read --unstable --allow-env run.ts",
     "test": "deno test -A --unstable spec"
   }
 }

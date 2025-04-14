@@ -8,6 +8,6 @@ import { DatabaseModule } from "../database/module.ts";
 @Module({
   controllers: [TodoController],
   injectables: [new TokenInjector(PostgresRepository, USER_REPOSITORY), TodoService], // change InMemoryTodoRepository by any custom repository using other database engine if needed
-    imports: [DatabaseModule]
+  imports: [DatabaseModule]
 })
-export class TodoModule {}
+export class TodoModule { }
