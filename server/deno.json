@@ -16,7 +16,7 @@
     "emitDecoratorMetadata": true
   },
   "imports": {
-    "@danet/core": "jsr:@danet/core@2",
+    "@danet/core": "jsr:@danet/core@^2.9.3",
     "@std/dotenv": "jsr:@std/dotenv@^0.225.3",
     "@db/mongo": "jsr:@db/mongo@0.33.0",
     "@bartlomieju/postgres": "jsr:@bartlomieju/postgres",
@@ -25,7 +25,7 @@
     "@std/testing": "jsr:@std/testing@1.0.3"
   },
   "tasks": {
-    "launch-server": "deno run --allow-net --allow-read --unstable --allow-env run.ts",
+    "launch-server": "deno run --allow-write --allow-net --allow-read --unstable --watch --allow-env run.ts",
     "test": "deno test -A --unstable spec"
   }
 }

@@ -4,5 +4,4 @@ export interface Image {
   path: string;
   url: string;
   createdAt: Date;
-
 }

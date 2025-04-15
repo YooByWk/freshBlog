@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@danet/core';
 import { Todo } from './class.ts';
 import type { Repository } from '../database/repository.ts';
-import { USER_REPOSITORY } from './constant.ts';
+import { USER_REPOSITORY } from '../constant.ts';
 
 @Injectable()
 export class TodoService {

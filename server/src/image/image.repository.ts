@@ -1,4 +1,4 @@
-import { Inject } from '@danet/core';
+import { Inject, Logger } from '@danet/core';
 import { DATABASE } from '../database/module.ts';
 import { PostgresService } from '../database/postgres.service.ts';
 import { Repository } from '../database/repository.ts';
@@ -6,6 +6,7 @@ import { Repository } from '../database/repository.ts';
 // any는 작성 후 Image 로 변경하자.
 export class ImageRepository implements Partial<Repository<any>> {
   constructor(@Inject(DATABASE) private dbService: PostgresService) { }
+  private logger = new Logger('ImageRepository');
 
   async getAll(): Promise<any[]> {
     const { rows } = await this.dbService.client.queryObject<any>(
@@ -13,14 +14,14 @@ export class ImageRepository implements Partial<Repository<any>> {
     );
     return rows;
   };
-  
+
   async getByPaths(paths: string[]): Promise<any> {
     const { rows } = await this.dbService.client.queryObject<any>(
       `SELECT * FROM IMAGE WHERE path IN (${paths.map((path) => `'${path}'`).join(', ')})`
     );
     return rows;
   }
-  
+
   // 이게 필요할지는 모르겠음. 
   async getById(id: string) {
     const { rows } = await this.dbService.client.queryObject<any>(
@@ -31,12 +32,13 @@ export class ImageRepository implements Partial<Repository<any>> {
 
   // 할일: 수정 후 Omit<Image, 'id'> 로 변경해야 함.
   async create(image: any): Promise<any> {
+    console.log('호출', image);
     const { rows } = await this.dbService.client.queryObject<any>(
       `INSERT INTO IMAGE (filename, path, url)
        VALUES ('${image.filename}', '${image.path}', '${image.url}')
-       RETURNING id, filename, path, url;
-      )`
+       RETURNING id, filename, path, url;`
     );
+    this.logger.log(`ImageRepository.create() | ${rows[0].id} | ${image.filename} | ${image.path} | ${image.url}`);
     return rows[0];
   };
 

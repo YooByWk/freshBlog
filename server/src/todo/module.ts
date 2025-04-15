@@ -1,7 +1,7 @@
 import { TodoController } from './controller.ts';
 import { TodoService } from './service.ts';
 import { Module, TokenInjector } from '@danet/core';
-import { USER_REPOSITORY } from './constant.ts';
+import { USER_REPOSITORY } from '../constant.ts';
 import { PostgresRepository } from "./postgres-repository.ts";
 import { DatabaseModule } from "../database/module.ts";
 

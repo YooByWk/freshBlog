@@ -24,19 +24,24 @@ function createFetch(baseURL = "", defaultHeaders: Record<string, string> = {}):
 }
 
 // env 로 수정
-const apiFetch: FetchFunction = createFetch('http://localhost:3000/', {
+const apiFetch: FetchFunction = createFetch('http://localhost/api/', {
   // "Content-Type": "application/json",
 });
 
 
 class ImageAPIClass {
 
-  async uploadImage(file: File, title?: string): Promise<any> {
+  async uploadImage(file: File, title?: string, slug?: string): Promise<any> {
     const formData = new FormData();
     if (title) {
       formData.append('title', title);
     }
+    if (slug) {
+      formData.append('slug', slug);
+
+    }
     formData.append('image', file);
+
     try {
       const res = await apiFetch('image', {
         headers: {},
@@ -52,4 +57,4 @@ class ImageAPIClass {
 }
 
 // 싱글톤 패턴으로 ImageAPIClass 인스턴스 생성
-export const ImageAPI = new ImageAPIClass()
+export const ImageAPI = new ImageAPIClass();

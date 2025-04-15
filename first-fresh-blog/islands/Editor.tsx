@@ -11,6 +11,7 @@ export default function Editor() {
   const quillRef = useRef<any>(null);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const [slug, setSlug] = useState<string>("");
   const [isEditorLoading, setIsEditorLoading] = useState<boolean>(true);
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
 
@@ -19,7 +20,7 @@ export default function Editor() {
     const doc = parser.parseFromString(html, 'text/html');
     const imgElements = doc.querySelectorAll('img');
     const promises: Promise<void>[] = [];
-    
+
     imgElements.forEach((img, idx) => {
       const src = img.getAttribute('src');
       if (src && src.startsWith('data:')) {
@@ -27,7 +28,7 @@ export default function Editor() {
           .then(res => res.blob())
           .then(async (blob) => {
             const file = new File([blob], `image${idx}.png`, { type: blob.type });
-            const imageUrl = await ImageAPI.uploadImage(file, title);
+            const imageUrl = await ImageAPI.uploadImage(file, title, slug);
             img.setAttribute('src', imageUrl.url);
           })
           .catch(err => console.error(err));
@@ -49,11 +50,22 @@ export default function Editor() {
       alert("제목을 입력해주세요");
       return;
     }
+
     if ((htmlContent.length) < 50) {
       alert("내용을 입력해주세요");
       return;
     }
 
+    if (!slug) {
+      alert("슬러그를 입력해주세요");
+      return;
+    }
+    // 슬러그가 영문이나 숫자가 아닌 경우 반환
+    if (slug.match(/[^a-zA-Z0-9-_]/)) {
+      alert("슬러그는 영문, 숫자, - 또는 _ 만 가능합니다.");
+      return;
+    }
+    console.log("저장");
     htmlContent = await processImages(htmlContent);
     setContent(htmlContent);
 
@@ -142,11 +154,18 @@ export default function Editor() {
 
       {/* 에디터 컨테이너 */}
       <div style="height: 70vh; position: relative;">
-        <input
-          class="border border-gray-300 rounded-lg p-2 mb-4 w-full dark:bg-gray-800 dark:text-white"
-          type="text"
-          onChange={(e) => setTitle(e.currentTarget.value)}
-          placeholder="제목을 입력해주세요" />
+        <div className="flex gap-4">
+          <input
+            class="border border-gray-300 rounded-lg p-2 mb-4 w-5/6 dark:bg-slate-800 dark:text-white"
+            type="text"
+            onChange={(e) => setTitle(e.currentTarget.value)}
+            placeholder="제목을 입력해주세요" />
+          <input
+            class="border border-gray-300 rounded-lg p-2 mb-4 w-1/6 dark:bg-slate-950 dark:text-white"
+            type="text"
+            onChange={(e) => setSlug(e.currentTarget.value)}
+            placeholder="slug" />
+        </div>
         <div ref={editorRef} style="height: 72.5vh; max-height:75vh"></div>
         {/* 에디터 로딩 스피너 오버레이 */}
         {isEditorLoading && (
