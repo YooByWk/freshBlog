@@ -3,13 +3,13 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { Button } from "../components/Button.tsx";
 import { LuLoaderCircle } from "@preact-icons/lu";
-import { uploadImage } from "../routes/api/image.ts";
+import { ImageAPI } from "../routes/api/image.ts";
 
 
 export default function Editor() {
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<any>(null);
-
+  const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");
   const [isEditorLoading, setIsEditorLoading] = useState<boolean>(true);
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
@@ -18,21 +18,21 @@ export default function Editor() {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const imgElements = doc.querySelectorAll('img');
-
     const promises: Promise<void>[] = [];
-    imgElements.forEach((img,idx) => {
+    
+    imgElements.forEach((img, idx) => {
       const src = img.getAttribute('src');
       if (src && src.startsWith('data:')) {
         const blobPromise = fetch(src)
           .then(res => res.blob())
           .then(async (blob) => {
             const file = new File([blob], `image${idx}.png`, { type: blob.type });
-            const imageUrl = await uploadImage(file);
+            const imageUrl = await ImageAPI.uploadImage(file, title);
             img.setAttribute('src', imageUrl.url);
           })
           .catch(err => console.error(err));
         promises.push(blobPromise);
-        console.log("Promise Pushed");
+        // console.log("Promise Pushed");
       }
     });
     // 모든 Promise 대기
@@ -42,12 +42,22 @@ export default function Editor() {
   }
 
   const onSave = async () => {
-    console.log("저장하기");
+    // console.log("저장하기");
     // wysiwyg 에디터 내용 출력 -> 저장으로 수정
     let htmlContent = quillRef.current.root.innerHTML;
+    if (!title) {
+      alert("제목을 입력해주세요");
+      return;
+    }
+    if ((htmlContent.length) < 50) {
+      alert("내용을 입력해주세요");
+      return;
+    }
+
     htmlContent = await processImages(htmlContent);
     setContent(htmlContent);
-    console.log(htmlContent, "htmlContent");
+
+    // console.log(htmlContent, "htmlContent");
     // setContent(quillRef.current.root.innerHTML);
     // console.log(quillRef.current.root.innerHTML);
   };
@@ -131,8 +141,13 @@ export default function Editor() {
       <h1 class="font-bold text-lg mb-4">블로그 포스팅하기~</h1>
 
       {/* 에디터 컨테이너 */}
-      <div style="height: 75vh; position: relative;">
-        <div ref={editorRef} style="height: 100%;"></div>
+      <div style="height: 70vh; position: relative;">
+        <input
+          class="border border-gray-300 rounded-lg p-2 mb-4 w-full dark:bg-gray-800 dark:text-white"
+          type="text"
+          onChange={(e) => setTitle(e.currentTarget.value)}
+          placeholder="제목을 입력해주세요" />
+        <div ref={editorRef} style="height: 72.5vh; max-height:75vh"></div>
         {/* 에디터 로딩 스피너 오버레이 */}
         {isEditorLoading && (
           <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-10">
@@ -150,7 +165,7 @@ export default function Editor() {
           </div>
         )}
         {/* 버튼 영역 */}
-        <div class="flex justify-end mt-8 gap-4">
+        <div class="flex justify-end mt-2 gap-4">
           <Button class="rounded-full bg-gray-400 px-4 py-2 text-sm font-medium" onClick={() => console.log("취소하기 버튼 클릭됨")}>
             취소하기
           </Button>
