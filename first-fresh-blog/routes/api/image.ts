@@ -23,22 +23,33 @@ function createFetch(baseURL = "", defaultHeaders: Record<string, string> = {}):
   };
 }
 
+// env 로 수정
 const apiFetch: FetchFunction = createFetch('http://localhost:3000/', {
   // "Content-Type": "application/json",
 });
 
-export async function uploadImage(file: File): Promise<any> {
-  const formData = new FormData();
-  formData.append('image', file);
-  try {
-    const res = await apiFetch('image', {
-      headers: {},
-      method: "POST",
-      body: formData
-    });
-    console.log(res, "이미지 업로드 성공");
-    return res;
-  } catch (err) {
-    console.error('uploadImage Error: ', err);
+
+class ImageAPIClass {
+
+  async uploadImage(file: File, title?: string): Promise<any> {
+    const formData = new FormData();
+    if (title) {
+      formData.append('title', title);
+    }
+    formData.append('image', file);
+    try {
+      const res = await apiFetch('image', {
+        headers: {},
+        method: "POST",
+        body: formData
+      });
+      console.log(res, "이미지 업로드 성공");
+      return res;
+    } catch (err) {
+      console.error('uploadImage Error: ', err);
+    }
   }
 }
+
+// 싱글톤 패턴으로 ImageAPIClass 인스턴스 생성
+export const ImageAPI = new ImageAPIClass()
