@@ -6,6 +6,7 @@ import * as $_lang_ from "./routes/[lang].tsx";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
+import * as $api_image from "./routes/api/image.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $blog_createpost_index from "./routes/blog/createpost/index.tsx";
 import * as $blog_index from "./routes/blog/index.tsx";
@@ -24,6 +25,7 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/_middleware.ts": $_middleware,
+    "./routes/api/image.ts": $api_image,
     "./routes/api/joke.ts": $api_joke,
     "./routes/blog/createpost/index.tsx": $blog_createpost_index,
     "./routes/blog/index.tsx": $blog_index,

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "preact/hooks";
 import { Button } from "../components/Button.tsx";
 import { LuLoaderCircle } from "@preact-icons/lu";
+import { uploadImage } from "../routes/api/image.ts";
 
 
 export default function Editor() {
@@ -13,12 +14,46 @@ export default function Editor() {
   const [isEditorLoading, setIsEditorLoading] = useState<boolean>(true);
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
 
-  const onSave = () => {
+  async function processImages(html: string) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const imgElements = doc.querySelectorAll('img');
+
+    const promises: Promise<void>[] = [];
+    imgElements.forEach((img,idx) => {
+      const src = img.getAttribute('src');
+      if (src && src.startsWith('data:')) {
+        const blobPromise = fetch(src)
+          .then(res => res.blob())
+          .then(async (blob) => {
+            const file = new File([blob], `image${idx}.png`, { type: blob.type });
+            const imageUrl = await uploadImage(file);
+            img.setAttribute('src', imageUrl.url);
+          })
+          .catch(err => console.error(err));
+        promises.push(blobPromise);
+        console.log("Promise Pushed");
+      }
+    });
+    // 모든 Promise 대기
+    await Promise.all(promises);
+    // 수정된 HTML 반환
+    return doc.body.innerHTML;
+  }
+
+  const onSave = async () => {
     console.log("저장하기");
     // wysiwyg 에디터 내용 출력 -> 저장으로 수정
-    setContent(quillRef.current.root.innerHTML);
-    console.log(quillRef.current.root.innerHTML);
+    let htmlContent = quillRef.current.root.innerHTML;
+    htmlContent = await processImages(htmlContent);
+    setContent(htmlContent);
+    console.log(htmlContent, "htmlContent");
+    // setContent(quillRef.current.root.innerHTML);
+    // console.log(quillRef.current.root.innerHTML);
   };
+
+
+
 
   useEffect(() => {
     import("quill").then(({ default: Quill }) => {
@@ -38,6 +73,7 @@ export default function Editor() {
       if (editorRef.current) {
         const quill = new Quill(editorRef.current, {
           theme: "snow",
+
           modules: {
             syntax: true,
             toolbar: toolbarOptions,
@@ -46,16 +82,45 @@ export default function Editor() {
         quillRef.current = quill;
         setIsEditorLoading(false);
         console.log("설정 완료");
+        /*
         // 이미지 복붙! 
         editorRef.current.addEventListener('paste', async (e: ClipboardEvent) => {
+          e.stopPropagation();
+          e.preventDefault();
           if (!e.clipboardData) return;
           console.log(e, "이벤트 감지");
           const items = e.clipboardData.items;
           console.log(items, "아이템");
           for (let i = 0; i < items.length; i++) {
+            const item = items[i];
             console.log(items[i], "아이템 반복");
+            if (item.type.startsWith('image/')) {
+              console.log('이것은 이미지군요!');
+              const file = item.getAsFile();
+              if (file) {
+                console.log(file, "파일");
+                // buffer로 변환? 
+                try {
+                  setIsImageUploading(true);
+                  const imageUrl = await uploadImage(file);
+                  // 이미지
+                  const range = quillRef.current.getSelection(true);
+                  console.log(range, '현위치');
+                  quillRef.current.insertEmbed(range.index, 'image', imageUrl);
+                  quillRef.current.setSelection(range.index + 1);
+
+                } catch (err) {
+                  console.error(err);
+                }
+                finally {
+                  setIsImageUploading(false);
+                }
+              } // if file 종료
+            } // if 종료
           }
         });
+        */ // 이미지 업로드 끝
+
       }
     });
   }, []);
