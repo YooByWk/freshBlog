@@ -1,4 +1,4 @@
-import { Inject, Injectable, Logger } from '@danet/core';
+import { HttpException, Inject, Injectable, Logger } from '@danet/core';
 import { IMAGE_REPOSITORY } from '../constant.ts';
 import { ImageRepository } from './image.repository.ts';
 import { ensureDir } from 'jsr:@std/fs@1.0.4';
@@ -41,8 +41,10 @@ export class ImageService {
     this.logger.log(`imageFile | 누적 카운트 : ${this.cnt} | title`);
 
     try {
+
       // 0. 폴더 확인 & 생성
       const dir = this.uploadPath + slug;
+
       await ensureDir(dir);
       // 1. 파일 저장을 위해 우선 filename 생성
       const imageFileName = `${Date.now()}-${Math.random().toString(36).substring(2, 15)}`;
@@ -60,6 +62,7 @@ export class ImageService {
         url: `http://localhost/image/${slug}/${imageFileName}.${fileType}`,
       };
       const result = await this.repository.create(repoObj);
+      console.log(result, 'result');
       return result;
     } catch (err) {
       this.logger.error(`업로드 실패 : ${err}`);
