@@ -20,6 +20,7 @@ export default function Editor() {
     const doc = parser.parseFromString(html, 'text/html');
     const imgElements = doc.querySelectorAll('img');
     const promises: Promise<void>[] = [];
+    const imageIds: (string | number)[] = [];
 
     imgElements.forEach((img, idx) => {
       const src = img.getAttribute('src');
@@ -28,8 +29,9 @@ export default function Editor() {
           .then(res => res.blob())
           .then(async (blob) => {
             const file = new File([blob], `image${idx}.png`, { type: blob.type });
-            const imageUrl = await ImageAPI.uploadImage(file, title, slug);
-            img.setAttribute('src', imageUrl.url);
+            const imageRes = await ImageAPI.uploadImage(file, title, slug);
+            img.setAttribute('src', imageRes.url);
+            imageIds.push(imageRes.id);
           })
           .catch(err => console.error(err));
         promises.push(blobPromise);
@@ -39,7 +41,11 @@ export default function Editor() {
     // 모든 Promise 대기
     await Promise.all(promises);
     // 수정된 HTML 반환
-    return doc.body.innerHTML;
+
+    return {
+      updatedHtml: doc.body.innerHTML,
+      imageIds
+    };
   }
 
   const onSave = async () => {
@@ -65,10 +71,10 @@ export default function Editor() {
       alert("슬러그는 영문, 숫자, - 또는 _ 만 가능합니다.");
       return;
     }
-    console.log("저장");
-    htmlContent = await processImages(htmlContent);
-    setContent(htmlContent);
-
+    const { updatedHtml, imageIds } = await processImages(htmlContent);
+    setContent(updatedHtml);
+    console.log(content);
+    // 생성된 이미지들을 해당 포스트에 연결해야함
     // console.log(htmlContent, "htmlContent");
     // setContent(quillRef.current.root.innerHTML);
     // console.log(quillRef.current.root.innerHTML);
