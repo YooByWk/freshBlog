@@ -2,19 +2,30 @@ import { HttpException, Inject, Injectable, Logger } from '@danet/core';
 import { IMAGE_REPOSITORY } from '../constant.ts';
 import { ImageRepository } from './image.repository.ts';
 import { ensureDir } from 'jsr:@std/fs@1.0.4';
+import type { Repository } from '../database/repository.ts';
+import { PrismaService } from '../prisma/prisma.service.ts';
+
+import { PrismaClient } from "../generated/prisma/index.js";
+import { PRISMA } from '../prisma/prisma.module.ts';
+import type { PrismaClient as TPrismaClient } from '../generated/prisma/index.d.ts';
 
 
-
+const prisma = new PrismaClient();
 @Injectable()
 export class ImageService {
-  constructor(@Inject(IMAGE_REPOSITORY) private repository: ImageRepository) { }
+  // constructor(@Inject(IMAGE_REPOSITORY) private repository: Repository<any>) { }
+  // constructor(@Inject(IMAGE_REPOSITORY) private readonly repository: ImageRepository) { }
+  // constructor(private readonly repository: PrismaService) { }
+  // constructor()
+  constructor(@Inject(PRISMA) private repository: TPrismaClient) { }
+
   private cnt = 0;
   private logger = new Logger('ImageService');
   private uploadPath = Deno.cwd() + '/uploads/';
 
   getAll() {
-    console.log(this.repository.getAll(), 'API Test');
-    return this.repository.getAll();
+    // console.log(this.repository.getAll(), 'API Test');
+    // return this.repository.getAll();
   }
 
   // nginx에서 처리할거임.
@@ -57,11 +68,15 @@ export class ImageService {
       this.logger.log(`파일 저장 완료 : ${dir + '/' + imageFileName}`);
       // 3. 저장된 경로를 전달 후 Db에 저장
       const repoObj = {
-        filename: imageFileName,
+        fileName: imageFileName,
         path: filePath,
         url: `http://localhost/image/${slug}/${imageFileName}.${fileType}`,
       };
-      const result = await this.repository.create(repoObj);
+      console.log('repo go', repoObj);
+      const result = await this.repository.image.create({
+        data: repoObj
+      });
+      // const result = await this.repository.create(repoObj);
       console.log(result, 'result');
       return result;
     } catch (err) {

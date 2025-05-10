@@ -4,7 +4,7 @@ interface RequestOptions extends RequestInit {
 
 type FetchFunction = (url: string, options?: RequestOptions) => Promise<any>;
 
-function createFetch(baseURL = "", defaultHeaders: Record<string, string> = {}): FetchFunction {
+export function createFetch(baseURL = "", defaultHeaders: Record<string, string> = {}): FetchFunction {
   return async function (url, options: RequestOptions = {}) {
     const fullURL = baseURL + url;
     const headers = { ...defaultHeaders, ...options.headers };

@@ -1,11 +1,13 @@
-import { Inject, Logger } from '@danet/core';
+import { Repository } from '../database/repository.ts';
+import { Inject, Injectable, Logger } from '@danet/core';
 import { DATABASE } from '../database/module.ts';
 import { PostgresService } from '../database/postgres.service.ts';
-import { Repository } from '../database/repository.ts';
 
 // any는 작성 후 Image 로 변경하자.
+@Injectable()
 export class ImageRepository implements Partial<Repository<any>> {
-  constructor(@Inject(DATABASE) private dbService: PostgresService) { }
+  constructor(@Inject(DATABASE) protected dbService: PostgresService) { }
+
   private logger = new Logger('ImageRepository');
 
   async getAll(): Promise<any[]> {
@@ -32,14 +34,21 @@ export class ImageRepository implements Partial<Repository<any>> {
 
   // 할일: 수정 후 Omit<Image, 'id'> 로 변경해야 함.
   async create(image: any): Promise<any> {
-    console.log('호출', image);
-    const { rows } = await this.dbService.client.queryObject<any>(
-      `INSERT INTO IMAGE (filename, path, url)
+    // console.log('호출', image);
+    try {
+      console.log(this.dbService.client, 'DB Client');
+      const { rows } = await this.dbService.queryObject(
+        `INSERT INTO IMAGE (filename, path, url)
        VALUES ('${image.filename}', '${image.path}', '${image.url}')
        RETURNING id, filename, path, url;`
-    );
-    this.logger.log(`ImageRepository.create() | ${rows[0].id} | ${image.filename} | ${image.path} | ${image.url}`);
-    return rows[0];
+
+      );
+      // this.logger.log(`ImageRepository.create() | ${rows[0].id} | ${image.filename} | ${image.path} | ${image.url}`);
+      return rows[0];
+    } catch (err) {
+      console.log(err);
+    }
+
   };
 
   async deleteOne(imageId: string) {

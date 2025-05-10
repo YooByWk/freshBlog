@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "preact/hooks";
 import { Button } from "../components/Button.tsx";
 import { LuLoaderCircle } from "@preact-icons/lu";
 import { ImageAPI } from "../routes/api/image.ts";
-
+import { PostAPI } from "../routes/api/post.ts";
 
 export default function Editor() {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -51,7 +51,7 @@ export default function Editor() {
   const onSave = async () => {
     // console.log("저장하기");
     // wysiwyg 에디터 내용 출력 -> 저장으로 수정
-    let htmlContent = quillRef.current.root.innerHTML;
+    const htmlContent = quillRef.current.root.innerHTML;
     if (!title) {
       alert("제목을 입력해주세요");
       return;
@@ -71,9 +71,24 @@ export default function Editor() {
       alert("슬러그는 영문, 숫자, - 또는 _ 만 가능합니다.");
       return;
     }
+    // 이미지 우선 저장
     const { updatedHtml, imageIds } = await processImages(htmlContent);
-    setContent(updatedHtml);
-    console.log(content);
+    setContent(updatedHtml); // 업데이트 된 HTML 반영이긴 함
+    console.log(updatedHtml);
+
+    console.log();
+    console.log();
+    console.log(imageIds);
+    // 저장된 이미지 결과를 통한 POST 요청
+
+    const postData = {
+      title,
+      content: updatedHtml,
+      slug
+    };
+    const postRes = await PostAPI.createPost(postData, imageIds);
+
+
     // 생성된 이미지들을 해당 포스트에 연결해야함
     // console.log(htmlContent, "htmlContent");
     // setContent(quillRef.current.root.innerHTML);

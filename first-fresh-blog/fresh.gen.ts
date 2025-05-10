@@ -8,6 +8,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
 import * as $api_image from "./routes/api/image.ts";
 import * as $api_joke from "./routes/api/joke.ts";
+import * as $api_post from "./routes/api/post.ts";
 import * as $blog_createpost_index from "./routes/blog/createpost/index.tsx";
 import * as $blog_index from "./routes/blog/index.tsx";
 import * as $deno_index from "./routes/deno/index.tsx";
@@ -27,6 +28,7 @@ const manifest = {
     "./routes/_middleware.ts": $_middleware,
     "./routes/api/image.ts": $api_image,
     "./routes/api/joke.ts": $api_joke,
+    "./routes/api/post.ts": $api_post,
     "./routes/blog/createpost/index.tsx": $blog_createpost_index,
     "./routes/blog/index.tsx": $blog_index,
     "./routes/deno/index.tsx": $deno_index,

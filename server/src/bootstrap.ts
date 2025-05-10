@@ -3,12 +3,13 @@ import { AppModule } from './app.module.ts';
 import { DanetApplication } from '@danet/core';
 import { loggerMiddleware } from './logger.middleware.ts';
 import { SpecBuilder, SwaggerModule } from '@danet/swagger';
+import { ImageModule } from './image/image.module.ts';
 export const bootstrap = async () => {
   const application = new DanetApplication();
   application.enableCors();
   application.registerBasePath('api');
   await application.init(AppModule);
-
+  // await a
   const spec = new SpecBuilder()
     .setTitle('Todo')
     .setDescription('The todo API')

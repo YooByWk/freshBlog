@@ -1,18 +1,19 @@
-import { Body, Controller, Delete, Get, Header, Param, Post, Put, Req, Context, Res } from '@danet/core';
+import { Controller, Get, Post, Context } from '@danet/core';
 import { ImageService } from './image.service.ts';
 import type { HttpContext } from '@danet/core';
 
 
 @Controller('image')
 export class ImageController {
-  constructor(public imageService: ImageService) { }
+  constructor(
+    public imageService: ImageService
+  ) { }
 
   @Get()
   async getAll() {
     return { 1: 3 };
     // return this.imageService.getAll();
   }
-
 
   // // @Get(:slug)
   // @Get('i/:slug/:filename')
