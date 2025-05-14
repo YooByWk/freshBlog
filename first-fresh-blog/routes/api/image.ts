@@ -25,9 +25,8 @@ export function createFetch(baseURL = "", defaultHeaders: Record<string, string>
   };
 }
 const URL = 'http://localhost:3000/api/';
-const ServerURL = Deno.env.get("DOMAIN");
 const API_BASE_URL = IS_BROWSER
-  ? ServerURL
+  ? "http://bangerdirect.site/api/"
   : 'http://localhost:3000/api/';
 // env 로 수정
 const apiFetch: FetchFunction = createFetch(API_BASE_URL, {

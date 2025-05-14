@@ -3,9 +3,8 @@ import { IS_BROWSER } from "$fresh/runtime.ts";
 import { createFetch } from "./image.ts";
 
 const URL = 'http://localhost:3000/api/';
-const ServerURL = Deno.env.get("DOMAIN");
 const API_BASE_URL = IS_BROWSER
-  ? ServerURL
+  ? "http://bangerdirect.site/api/"
   : 'http://localhost:3000/api/';
 const api = createFetch(API_BASE_URL);
 
