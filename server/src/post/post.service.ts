@@ -82,7 +82,16 @@ export class PostService {
     return posts;
   }
 
-
+  // getBySlug
+  async getBySlug(slug: string) {
+    const post = await this.repository.post.findUnique({
+      where: {
+        slug
+      },
+      include: { images: true }
+    });
+    return post;
+  }
   //
 
   //

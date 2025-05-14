@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Inject, Injectable, Param, Post, Query } from '@danet/core';
+import { Body, Controller, Get, Inject, Injectable, Logger, Param, Post, Query } from '@danet/core';
 import { PostService } from './post.service.ts';
 
 
@@ -7,7 +7,7 @@ export class PostController {
   constructor(
     public postService: PostService
   ) { }
-
+  private logger = new Logger('PostController');
   // create
   @Post() // post 생성 객체 + 이미지 id 배열
   // async create(@Body() post: any, @Body() imgIds: (number | string)[]) {
@@ -22,6 +22,14 @@ export class PostController {
   @Get()
   async getAll(@Query('search') search?: string) {
     return await this.postService.getAll(search);
+  }
+
+  @Get('detail/:slug')
+  async getBySlug(@Param('slug') slug: string) {
+
+    const post = await this.postService.getBySlug(slug);
+    this.logger.log(`${post.title} : Get By Slug `);
+    return post;
   }
 
 } 
