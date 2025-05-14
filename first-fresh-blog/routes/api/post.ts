@@ -1,8 +1,8 @@
 
 import { createFetch } from "./image.ts";
 
-const api = createFetch('http://localhost/api/');
-
+const URL = Deno.env.get("URL") || 'http://localhost/api/';
+const api = createFetch(URL);
 export interface IPost {
   id?: number;
   slug: string;

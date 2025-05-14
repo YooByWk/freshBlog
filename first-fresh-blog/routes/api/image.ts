@@ -22,9 +22,10 @@ export function createFetch(baseURL = "", defaultHeaders: Record<string, string>
 
   };
 }
+const URL = Deno.env.get("URL") || 'http://localhost/api/';
 
 // env 로 수정
-const apiFetch: FetchFunction = createFetch('http://localhost/api/', {
+const apiFetch: FetchFunction = createFetch(URL, {
   // "Content-Type": "application/json",
 });
 
