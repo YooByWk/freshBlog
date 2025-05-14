@@ -1,3 +1,5 @@
+import { IS_BROWSER } from "$fresh/runtime.ts";
+
 interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
 }
@@ -22,10 +24,12 @@ export function createFetch(baseURL = "", defaultHeaders: Record<string, string>
 
   };
 }
-const URL = Deno.env.get("URL") || 'http://localhost:3000/api/';
-
+const URL = 'http://localhost:3000/api/';
+const API_BASE_URL = IS_BROWSER
+  ? Deno.env.get("DOMAIN")
+  : Deno.env.get("URL") || 'http://localhost:3000/api/';
 // env 로 수정
-const apiFetch: FetchFunction = createFetch(URL, {
+const apiFetch: FetchFunction = createFetch(API_BASE_URL, {
   // "Content-Type": "application/json",
 });
 

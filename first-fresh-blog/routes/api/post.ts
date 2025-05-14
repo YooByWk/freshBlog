@@ -1,8 +1,13 @@
 
+import { IS_BROWSER } from "$fresh/runtime.ts";
 import { createFetch } from "./image.ts";
 
-const URL = Deno.env.get("URL") || 'http://localhost:3000/api/';
-const api = createFetch(URL);
+const URL = 'http://localhost:3000/api/';
+const API_BASE_URL = IS_BROWSER
+  ? Deno.env.get("DOMAIN")
+  : Deno.env.get("URL") || 'http://localhost:3000/api/';
+const api = createFetch(API_BASE_URL);
+
 export interface IPost {
   id?: number;
   slug: string;
