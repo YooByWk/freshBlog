@@ -1,3 +1,4 @@
+import { useState } from "preact/hooks";
 import { KoHeader } from "../../../components/KoHeader.tsx";
 import Editor from "../../../islands/Editor.tsx";
 
@@ -9,9 +10,6 @@ export default function CreatePost() {
   return (
     <div>
       <KoHeader active={active} />
-      <div class="">
-
-      </div>
       <Editor />
     </div>
   );

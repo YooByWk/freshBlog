@@ -5,6 +5,9 @@ import { Button } from "../components/Button.tsx";
 import { LuLoaderCircle } from "@preact-icons/lu";
 import { ImageAPI } from "../routes/api/image.ts";
 import { PostAPI } from "../routes/api/post.ts";
+import ModalComponent from "../components/ModalComponent.tsx";
+// import { ModalComponent } from "../components/ModalComponent.tsx";
+
 
 export default function Editor() {
   const editorRef = useRef<HTMLDivElement>(null);
@@ -14,6 +17,11 @@ export default function Editor() {
   const [slug, setSlug] = useState<string>("");
   const [isEditorLoading, setIsEditorLoading] = useState<boolean>(true);
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
+  const [isBanger, setIsBanger] = useState<boolean>(false);
+
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+
 
   async function processImages(html: string) {
     const parser = new DOMParser();
@@ -166,57 +174,69 @@ export default function Editor() {
 
       }
     });
-  }, []);
+  }, [isBanger, isOpen]);
 
+  const editorContainer = (
+    <>
+
+    </>
+  );
   return (
     <div class="container mx-auto mt-20 px-4 sm:px-6 lg:px-8 min-h-24 relative">
       {/* 에디터 타이틀 및 버튼 등은 항상 렌더링 */}
-      <h1 class="font-bold text-lg mb-4">블로그 포스팅하기~</h1>
+      {!isBanger && isOpen && ModalComponent({
+        isOpen,
+        onClose: () => setIsOpen(false),
+        initialTitle: "누구세요",
+        isBanger: false,
+        setIsBanger: () => setIsBanger(!isBanger),
+      })}
+      {isBanger && !isOpen && (<>
+        <h1 class="font-bold text-lg mb-4">블로그 포스팅하기~</h1>
+        {/* 에디터 컨테이너 */}
+        <div style="height: 70vh; position: relative;">
+          <div className="flex gap-4">
+            <input
+              class="border border-gray-300 rounded-lg p-2 mb-4 w-5/6 dark:bg-slate-800 dark:text-white"
+              type="text"
+              onChange={(e) => setTitle(e.currentTarget.value)}
+              placeholder="제목을 입력해주세요" />
+            <input
+              class="border border-gray-300 rounded-lg p-2 mb-4 w-1/6 dark:bg-slate-950 dark:text-white"
+              type="text"
+              onChange={(e) => setSlug(e.currentTarget.value)}
+              placeholder="slug" />
+          </div>
+          <div ref={editorRef} style="height: 72.5vh; max-height:75vh"></div>
+          {/* 에디터 로딩 스피너 오버레이 */}
+          {isEditorLoading && (
+            <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-10">
+              <Button type="button" class="bg-indigo-500 flex justify-center items-center p-6 rounded-lg" disabled>
+                <LuLoaderCircle class="animate-spin mr-4 text-lg" />
+                <p class="text-lg">에디터 로딩중...</p>
+              </Button>
+            </div>
+          )}
 
-      {/* 에디터 컨테이너 */}
-      <div style="height: 70vh; position: relative;">
-        <div className="flex gap-4">
-          <input
-            class="border border-gray-300 rounded-lg p-2 mb-4 w-5/6 dark:bg-slate-800 dark:text-white"
-            type="text"
-            onChange={(e) => setTitle(e.currentTarget.value)}
-            placeholder="제목을 입력해주세요" />
-          <input
-            class="border border-gray-300 rounded-lg p-2 mb-4 w-1/6 dark:bg-slate-950 dark:text-white"
-            type="text"
-            onChange={(e) => setSlug(e.currentTarget.value)}
-            placeholder="slug" />
-        </div>
-        <div ref={editorRef} style="height: 72.5vh; max-height:75vh"></div>
-        {/* 에디터 로딩 스피너 오버레이 */}
-        {isEditorLoading && (
-          <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-10">
-            <Button type="button" class="bg-indigo-500 flex justify-center items-center p-6 rounded-lg" disabled>
-              <LuLoaderCircle class="animate-spin mr-4 text-lg" />
-              <p class="text-lg">에디터 로딩중...</p>
+          {/* 이미지 업로드 스피너 오버레이 */}
+          {isImageUploading && (
+            <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-20">
+              <LuLoaderCircle class="animate-spin text-3xl" />
+            </div>
+          )}
+          {/* 버튼 영역 */}
+          <div class="flex justify-end mt-2 gap-4">
+            <Button class="rounded-full bg-gray-400 px-4 py-2 text-sm font-medium" onClick={() => console.log("취소하기 버튼 클릭됨")}>
+              취소하기
             </Button>
-          </div>
-        )}
-
-        {/* 이미지 업로드 스피너 오버레이 */}
-        {isImageUploading && (
-          <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-20">
-            <LuLoaderCircle class="animate-spin text-3xl" />
-          </div>
-        )}
-        {/* 버튼 영역 */}
-        <div class="flex justify-end mt-2 gap-4">
-          <Button class="rounded-full bg-gray-400 px-4 py-2 text-sm font-medium" onClick={() => console.log("취소하기 버튼 클릭됨")}>
-            취소하기
-          </Button>
-          <Button onClick={onSave} class="rounded-full bg-gradient-to-r from-warm-400 to-warm-600 dark:from-pink-500 dark:to-purple-600 
+            <Button onClick={onSave} class="rounded-full bg-gradient-to-r from-warm-400 to-warm-600 dark:from-pink-500 dark:to-purple-600 
           px-4 py-2 text-sm font-medium text-white hover:shadow-lg hover:shadow-warm-500/25 
           dark:hover:shadow-pink-500/25 transition-all duration-300">
-            저장하기
-          </Button>
+              저장하기
+            </Button>
+          </div>
         </div>
-      </div>
-
+      </>)}
 
     </div>
   );
