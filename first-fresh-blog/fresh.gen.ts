@@ -10,6 +10,7 @@ import * as $api_common from "./routes/api/common.ts";
 import * as $api_image from "./routes/api/image.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $api_post from "./routes/api/post.ts";
+import * as $blog_slug_ from "./routes/blog/[slug].tsx";
 import * as $blog_createpost_index from "./routes/blog/createpost/index.tsx";
 import * as $blog_index from "./routes/blog/index.tsx";
 import * as $deno_index from "./routes/deno/index.tsx";
@@ -31,6 +32,7 @@ const manifest = {
     "./routes/api/image.ts": $api_image,
     "./routes/api/joke.ts": $api_joke,
     "./routes/api/post.ts": $api_post,
+    "./routes/blog/[slug].tsx": $blog_slug_,
     "./routes/blog/createpost/index.tsx": $blog_createpost_index,
     "./routes/blog/index.tsx": $blog_index,
     "./routes/deno/index.tsx": $deno_index,

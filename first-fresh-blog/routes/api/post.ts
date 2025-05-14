@@ -55,7 +55,16 @@ class PostAPIClass {
 
   // 슬러그를 통한 포스트 가져오기
   async getPostBySlug(slug: string) {
-
+    try {
+      const post = await api(`post/detail/${slug}`, {
+        method: "GET"
+      });
+      console.log(post);
+      return post;
+    } catch (error) {
+      console.error('getPostBySlug Error: ', error);
+      throw new Error(`Failed to fetch post by slug: ${error}`);
+    }
   }
 }
 

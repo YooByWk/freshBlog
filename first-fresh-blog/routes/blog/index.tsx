@@ -1,4 +1,5 @@
 import { Handlers, PageProps } from "$fresh/server.ts";
+import { Head } from "$fresh/runtime.ts";
 import { KoHeader } from "../../components/KoHeader.tsx";
 import { IPost, PostAPI } from "../api/post.ts";
 import { LuSparkles as Sparkles } from "@preact-icons/lu";
@@ -6,7 +7,7 @@ import { LuSparkles as Sparkles } from "@preact-icons/lu";
 const IS_DEV = Deno.env.get("IS_DEV") === "true" ? true : false;
 const CACHE_DURATION = Deno.env.get("POST_CACHE_DURATION") ? parseInt(Deno.env.get("POST_CACHE_DURATION")!) : 1000 * 60 * 5; // 5분
 
-let postListCache: {
+const postListCache: {
   data: IPost[] | null,
   timestamp: number;
 } = {
@@ -42,7 +43,8 @@ export const handler: Handlers<IPost[] | { error: string; } | null> = {
       });
     } catch (error) {
       console.error(error);
-      return ctx.render({ error: error.message || "알 수 없는 오류 발생" }, { status: 500 });
+      const errorMessage = (error instanceof Error) ? error.message : "알 수 없는 오류 발생";
+      return ctx.render({ error: errorMessage }, { status: 500 });
     }
   }
 };
@@ -54,9 +56,9 @@ export default function Blog(props: PageProps<IPost[] | { error: string; } | nul
   if (data && typeof data === 'object' && 'error' in data) {
     return (
       <>
-        <head>
-          <title> 오류 발생...</title>
-        </head>
+        <Head>
+          <title> 뱅어포와 공룡 - 오류 발생...</title>
+        </Head>
         <div class="flex flex-col items-center justify-center h-screen">
           <h1 class="text-4xl font-bold text-center">
             오류 발생
@@ -77,7 +79,7 @@ export default function Blog(props: PageProps<IPost[] | { error: string; } | nul
 
   return (
     <>
-      <KoHeader active={'/blog'} />
+      <KoHeader active='/blog' />
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-screen">
         {/* 타이틀 영역 - Tailwind config의 beige, warm, neutral 색상 활용 */}
         <div class="text-center mb-16">
