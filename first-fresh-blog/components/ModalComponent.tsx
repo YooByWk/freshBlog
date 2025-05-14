@@ -40,9 +40,6 @@ function ModalComponent({
     const hashFromServer = await CommonAPI.getP();
     const hashPw = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(password));
     const hexPw = encodeHex(hashPw);
-    console.log(hashFromServer.encoded);
-    console.log(hexPw);
-    console.log();
     // onSave({ title, content, slug, isBanger });
     if (hexPw === hashFromServer.encoded) {
       setIsBanger();

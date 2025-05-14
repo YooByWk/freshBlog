@@ -5,6 +5,7 @@ interface P {
 }
 const URL = Deno.env.get("URL") || 'http://localhost/api/';
 const api = createFetch(URL);
+console.log(URL);
 
 class CommonAPIClass {
   async getP(): Promise<P> {

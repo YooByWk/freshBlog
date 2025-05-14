@@ -18,5 +18,6 @@ export const bootstrap = async () => {
   // const document = await SwaggerModule.createDocument(application, spec);
   // await SwaggerModule.setup('api', application, document);
   application.addGlobalMiddlewares(loggerMiddleware);
+  console.log(Deno.env.get("DOMAIN"));
   return application;
 };
