@@ -21,7 +21,7 @@ export default function Editor() {
 
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
-
+  const [summary, setSummary] = useState<string>("");
 
   async function processImages(html: string) {
     const parser = new DOMParser();
@@ -92,7 +92,8 @@ export default function Editor() {
     const postData = {
       title,
       content: updatedHtml,
-      slug
+      slug,
+      summary
     };
     const postRes = await PostAPI.createPost(postData, imageIds);
 
@@ -176,11 +177,6 @@ export default function Editor() {
     });
   }, [isBanger, isOpen]);
 
-  const editorContainer = (
-    <>
-
-    </>
-  );
   return (
     <div class="container mx-auto mt-20 px-4 sm:px-6 lg:px-8 min-h-24 relative">
       {/* 에디터 타이틀 및 버튼 등은 항상 렌더링 */}
@@ -206,6 +202,13 @@ export default function Editor() {
               type="text"
               onChange={(e) => setSlug(e.currentTarget.value)}
               placeholder="slug" />
+          </div>
+          <div>
+            <textarea label='요약!'
+              class="border border-gray-300 rounded-lg p-2 mb-4 w-full h-16 dark:bg-slate-800 dark:text-white"
+              onInput={(e) => setSummary(e.currentTarget.value)}
+            >
+            </textarea>
           </div>
           <div ref={editorRef} style="height: 72.5vh; max-height:75vh"></div>
           {/* 에디터 로딩 스피너 오버레이 */}
