@@ -1,4 +1,4 @@
-import { Body, Controller, Inject, Injectable, Post } from '@danet/core';
+import { Body, Controller, Get, Inject, Injectable, Param, Post, Query } from '@danet/core';
 import { PostService } from './post.service.ts';
 
 
@@ -15,9 +15,13 @@ export class PostController {
     console.log(post.title, imgIds);
     console.log(123123);
     return await this.postService.create(post, imgIds);
-
   }
 
   // Get ALL
+  // 추후 페이지네이션
+  @Get()
+  async getAll(@Query('search') search?: string) {
+    return await this.postService.getAll(search);
+  }
 
 } 

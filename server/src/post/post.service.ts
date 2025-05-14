@@ -5,7 +5,7 @@ import type { Repository } from '../database/repository.ts';
 import { PrismaService } from '../prisma/prisma.service.ts';
 
 import { PrismaClient } from "../generated/prisma/index.js";
-import type { PrismaClient as TPrismaClient } from '../generated/prisma/index.d.ts';
+import type { Prisma, PrismaClient as TPrismaClient } from '../generated/prisma/index.d.ts';
 import { PRISMA } from '../prisma/prisma.module.ts';
 
 
@@ -36,6 +36,7 @@ export class PostService {
           title: post.title,
           content: post.content,
           slug: post.slug,
+          summary: post.summary,
           ...(imagesToConnect.length > 0 && {
             images: {
               connect: imagesToConnect
@@ -53,7 +54,34 @@ export class PostService {
     // post 생성되면 해당 값을 이용해서 이미지 업데이트
   }
 
-  //
+  // 모든 Post 조회해오기
+  async getAll(search?: string) {
+
+    const findManyOptions: Prisma.PostFindManyArgs = {};
+
+    if (search && search.trim() !== '') {
+      findManyOptions.where = {
+        OR: [
+          {
+            title: {
+              contains: search.trim(), // 검색어 앞뒤 공백 제거
+              mode: 'insensitive'
+            }
+          },
+          {
+            content: {
+              contains: search.trim(), // 검색어 앞뒤 공백 제거
+              mode: 'insensitive'
+            }
+          }
+        ]
+      };
+    }
+
+    const posts = await this.repository.post.findMany(findManyOptions);
+    return posts;
+  }
+
 
   //
 
