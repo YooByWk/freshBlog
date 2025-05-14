@@ -11,6 +11,7 @@ import type { PrismaClient as TPrismaClient } from '../generated/prisma/index.d.
 
 
 const prisma = new PrismaClient();
+const domain = Deno.env.get("DOMAIN") || "localhost";
 @Injectable()
 export class ImageService {
   // constructor(@Inject(IMAGE_REPOSITORY) private repository: Repository<any>) { }
@@ -22,7 +23,6 @@ export class ImageService {
   private cnt = 0;
   private logger = new Logger('ImageService');
   private uploadPath = Deno.cwd() + '/uploads/';
-
   getAll() {
     // console.log(this.repository.getAll(), 'API Test');
     // return this.repository.getAll();
@@ -70,7 +70,7 @@ export class ImageService {
       const repoObj = {
         fileName: imageFileName,
         path: filePath,
-        url: `http://localhost/image/${slug}/${imageFileName}.${fileType}`,
+        url: `http://${domain}/image/${slug}/${imageFileName}.${fileType}`,
       };
       const result = await this.repository.image.create({
         data: repoObj

@@ -23,7 +23,8 @@
     "prisma": "npm:prisma@^6.7.0"
   },
   "tasks": {
-    "dev": "deno run -A --unstable --watch --unstable-detect-cjs run.ts",
+    "prod": "deno run -A --unstable --watch --unstable-detect-cjs run.ts",
+    "dev": "deno run -A --unstable --env-file=.env.dev --watch --unstable-detect-cjs run.ts",
     "start":"deno run --allow-write --allow-net --allow-read --unstable --watch --allow-env run.ts",
     "launch-server": "deno run --allow-write --allow-net --allow-read --unstable --watch --allow-env run.ts",
     "test": "deno test -A --unstable spec"
