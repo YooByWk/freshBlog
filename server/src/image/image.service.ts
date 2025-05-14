@@ -72,12 +72,10 @@ export class ImageService {
         path: filePath,
         url: `http://localhost/image/${slug}/${imageFileName}.${fileType}`,
       };
-      console.log('repo go', repoObj);
       const result = await this.repository.image.create({
         data: repoObj
       });
       // const result = await this.repository.create(repoObj);
-      console.log(result, 'result');
       return result;
     } catch (err) {
       this.logger.error(`업로드 실패 : ${err}`);
