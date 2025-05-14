@@ -4,7 +4,7 @@ import { createFetch } from "./image.ts";
 
 const URL = 'http://localhost:3000/api/';
 const API_BASE_URL = IS_BROWSER
-  ? "http://bangerdirect.site/api/"
+  ? "https://bangerdirect.site/api/"
   : 'http://localhost:3000/api/';
 const api = createFetch(API_BASE_URL);
 
