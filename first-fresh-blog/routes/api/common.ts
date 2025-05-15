@@ -31,14 +31,15 @@ class CommonAPIClass {
     return api('banger');
   }
   async login(username: string, password: string) {
+    console.log(apiBaseUrl);
     const payload = {
       username,
       password
-    }
+    };
     return api('auth/login', {
       method: "POST",
       body: JSON.stringify(payload)
-    })
+    });
   }
 }
 
