@@ -68,6 +68,7 @@ export class ImageService {
       this.logger.log(`파일 저장 완료 : ${dir + '/' + imageFileName}`);
 
       const URL = domain === 'localhost' ? 'http://localhost:3000' : `https://${domain}`;
+      console.log(URL);
       // 3. 저장된 경로를 전달 후 Db에 저장
       const repoObj = {
         fileName: imageFileName,
