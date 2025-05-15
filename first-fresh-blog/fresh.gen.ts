@@ -6,19 +6,23 @@ import * as $_lang_ from "./routes/[lang].tsx";
 import * as $_404 from "./routes/_404.tsx";
 import * as $_app from "./routes/_app.tsx";
 import * as $_middleware from "./routes/_middleware.ts";
+import * as $api_auth from "./routes/api/auth.ts";
 import * as $api_common from "./routes/api/common.ts";
 import * as $api_image from "./routes/api/image.ts";
 import * as $api_joke from "./routes/api/joke.ts";
 import * as $api_post from "./routes/api/post.ts";
+import * as $auth_index from "./routes/auth/index.tsx";
 import * as $blog_slug_ from "./routes/blog/[slug].tsx";
 import * as $blog_createpost_index from "./routes/blog/createpost/index.tsx";
 import * as $blog_index from "./routes/blog/index.tsx";
 import * as $deno_index from "./routes/deno/index.tsx";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
+import * as $AuthEditor from "./islands/AuthEditor.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $Editor from "./islands/Editor.tsx";
 import * as $LanguageSwitch from "./islands/LanguageSwitch.tsx";
+import * as $Login from "./islands/Login.tsx";
 import * as $ThemeToggle from "./islands/ThemeToggle.tsx";
 import type { Manifest } from "$fresh/server.ts";
 
@@ -28,10 +32,12 @@ const manifest = {
     "./routes/_404.tsx": $_404,
     "./routes/_app.tsx": $_app,
     "./routes/_middleware.ts": $_middleware,
+    "./routes/api/auth.ts": $api_auth,
     "./routes/api/common.ts": $api_common,
     "./routes/api/image.ts": $api_image,
     "./routes/api/joke.ts": $api_joke,
     "./routes/api/post.ts": $api_post,
+    "./routes/auth/index.tsx": $auth_index,
     "./routes/blog/[slug].tsx": $blog_slug_,
     "./routes/blog/createpost/index.tsx": $blog_createpost_index,
     "./routes/blog/index.tsx": $blog_index,
@@ -40,9 +46,11 @@ const manifest = {
     "./routes/index.tsx": $index,
   },
   islands: {
+    "./islands/AuthEditor.tsx": $AuthEditor,
     "./islands/Counter.tsx": $Counter,
     "./islands/Editor.tsx": $Editor,
     "./islands/LanguageSwitch.tsx": $LanguageSwitch,
+    "./islands/Login.tsx": $Login,
     "./islands/ThemeToggle.tsx": $ThemeToggle,
   },
   baseUrl: import.meta.url,

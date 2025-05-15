@@ -5,6 +5,7 @@ import { Button } from "../components/Button.tsx";
 import { LuLoaderCircle } from "@preact-icons/lu";
 import { ImageAPI } from "../routes/api/image.ts";
 import { PostAPI } from "../routes/api/post.ts";
+
 import ModalComponent from "../components/ModalComponent.tsx";
 // import { ModalComponent } from "../components/ModalComponent.tsx";
 
@@ -17,10 +18,6 @@ export default function Editor() {
   const [slug, setSlug] = useState<string>("");
   const [isEditorLoading, setIsEditorLoading] = useState<boolean>(true);
   const [isImageUploading, setIsImageUploading] = useState<boolean>(false);
-  const [isBanger, setIsBanger] = useState<boolean>(false);
-
-  const [isOpen, setIsOpen] = useState<boolean>(true);
-
   const [summary, setSummary] = useState<string>("");
 
   const COMPRESSION_BYTES = 800 * 1024;
@@ -145,11 +142,7 @@ export default function Editor() {
     // 이미지 우선 저장
     const { updatedHtml, imageIds } = await processImages(htmlContent);
     setContent(updatedHtml); // 업데이트 된 HTML 반영이긴 함
-    console.log(updatedHtml);
 
-    console.log();
-    console.log();
-    console.log(imageIds);
     // 저장된 이미지 결과를 통한 POST 요청
 
     const postData = {
@@ -160,6 +153,9 @@ export default function Editor() {
     };
     const postRes = await PostAPI.createPost(postData, imageIds);
 
+    if (postRes.slug) {
+      globalThis.location.href = `/blog/${slug}`;
+    }
 
     // 생성된 이미지들을 해당 포스트에 연결해야함
     // console.log(htmlContent, "htmlContent");
@@ -238,72 +234,61 @@ export default function Editor() {
 
       }
     });
-  }, [isBanger, isOpen]);
+  }, []);
 
   return (
     <div class="container mx-auto mt-20 px-4 sm:px-6 lg:px-8 min-h-24 relative">
-      {/* 에디터 타이틀 및 버튼 등은 항상 렌더링 */}
-      {!isBanger && isOpen && ModalComponent({
-        isOpen,
-        onClose: () => setIsOpen(false),
-        initialTitle: "누구세요",
-        isBanger: false,
-        setIsBanger: () => setIsBanger(!isBanger),
-      })}
-      {isBanger && !isOpen && (<>
-        <h1 class="font-bold text-lg mb-4">블로그 포스팅하기~</h1>
-        {/* 에디터 컨테이너 */}
-        <div style="height: 70vh; position: relative;">
-          <div className="flex gap-4">
-            <input
-              class="border border-gray-300 rounded-lg p-2 mb-4 w-5/6 dark:bg-slate-800 dark:text-white"
-              type="text"
-              onChange={(e) => setTitle(e.currentTarget.value)}
-              placeholder="제목을 입력해주세요" />
-            <input
-              class="border border-gray-300 rounded-lg p-2 mb-4 w-1/6 dark:bg-slate-950 dark:text-white"
-              type="text"
-              onChange={(e) => setSlug(e.currentTarget.value)}
-              placeholder="slug" />
-          </div>
-          <div>
-            <textarea label='요약!'
-              class="border border-gray-300 rounded-lg p-2 mb-4 w-full h-16 dark:bg-slate-800 dark:text-white"
-              onInput={(e) => setSummary(e.currentTarget.value)}
-            >
-            </textarea>
-          </div>
-          <div ref={editorRef} style="height: 72.5vh; max-height:75vh"></div>
-          {/* 에디터 로딩 스피너 오버레이 */}
-          {isEditorLoading && (
-            <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-10">
-              <Button type="button" class="bg-indigo-500 flex justify-center items-center p-6 rounded-lg" disabled>
-                <LuLoaderCircle class="animate-spin mr-4 text-lg" />
-                <p class="text-lg">에디터 로딩중...</p>
-              </Button>
-            </div>
-          )}
-
-          {/* 이미지 업로드 스피너 오버레이 */}
-          {isImageUploading && (
-            <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-20">
-              <LuLoaderCircle class="animate-spin text-3xl" />
-            </div>
-          )}
-          {/* 버튼 영역 */}
-          <div class="flex justify-end mt-2 gap-4">
-            <Button class="rounded-full bg-gray-400 px-4 py-2 text-sm font-medium" onClick={() => console.log("취소하기 버튼 클릭됨")}>
-              취소하기
+      <h1 class="font-bold text-lg mb-4">블로그 포스팅하기~</h1>
+      {/* 에디터 컨테이너 */}
+      <div style="height: 70vh; position: relative;">
+        <div className="flex gap-4">
+          <input
+            class="border border-gray-300 rounded-lg p-2 mb-4 w-5/6 dark:bg-slate-800 dark:text-white"
+            type="text"
+            onChange={(e) => setTitle(e.currentTarget.value)}
+            placeholder="제목을 입력해주세요" />
+          <input
+            class="border border-gray-300 rounded-lg p-2 mb-4 w-1/6 dark:bg-slate-950 dark:text-white"
+            type="text"
+            onChange={(e) => setSlug(e.currentTarget.value)}
+            placeholder="slug" />
+        </div>
+        <div>
+          <textarea label='요약!'
+            class="border border-gray-300 rounded-lg p-2 mb-4 w-full h-16 dark:bg-slate-800 dark:text-white"
+            onInput={(e) => setSummary(e.currentTarget.value)}
+          >
+          </textarea>
+        </div>
+        <div ref={editorRef} style="height: 72.5vh; max-height:75vh"></div>
+        {/* 에디터 로딩 스피너 오버레이 */}
+        {isEditorLoading && (
+          <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-10">
+            <Button type="button" class="bg-indigo-500 flex justify-center items-center p-6 rounded-lg" disabled>
+              <LuLoaderCircle class="animate-spin mr-4 text-lg" />
+              <p class="text-lg">에디터 로딩중...</p>
             </Button>
-            <Button onClick={onSave} class="rounded-full bg-gradient-to-r from-warm-400 to-warm-600 dark:from-pink-500 dark:to-purple-600 
+          </div>
+        )}
+
+        {/* 이미지 업로드 스피너 오버레이 */}
+        {isImageUploading && (
+          <div class="absolute inset-0 flex justify-center items-center bg-white bg-opacity-70 z-20">
+            <LuLoaderCircle class="animate-spin text-3xl" />
+          </div>
+        )}
+        {/* 버튼 영역 */}
+        <div class="flex justify-end mt-2 gap-4">
+          <Button class="rounded-full bg-gray-400 px-4 py-2 text-sm font-medium" onClick={() => console.log("취소하기 버튼 클릭됨")}>
+            취소하기
+          </Button>
+          <Button onClick={onSave} class="rounded-full bg-gradient-to-r from-warm-400 to-warm-600 dark:from-pink-500 dark:to-purple-600 
           px-4 py-2 text-sm font-medium text-white hover:shadow-lg hover:shadow-warm-500/25 
           dark:hover:shadow-pink-500/25 transition-all duration-300">
-              저장하기
-            </Button>
-          </div>
+            저장하기
+          </Button>
         </div>
-      </>)}
-
+      </div>
     </div>
   );
 }
