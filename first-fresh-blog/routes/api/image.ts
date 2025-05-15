@@ -43,10 +43,10 @@ if (IS_BROWSER) {
   if (location.origin === "http://localhost:43000") {
     apiBaseUrl = 'http://localhost:3000/api/';
   } else {
-    apiBaseUrl = Deno.env.get("DOMAIN") || "https://bangerdirect.site/api/";
+    apiBaseUrl = "https://bangerdirect.site/api/";
   }
 } else { // 서버에서 실행중인 경우 
-  apiBaseUrl = Deno.env.get("URL") || 'http://localhost:3000/api/';
+  apiBaseUrl =  'http://localhost:3000/api/';
 }
 
 const API_BASE_URL = apiBaseUrl;
