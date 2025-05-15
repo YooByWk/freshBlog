@@ -23,6 +23,8 @@ export default function Editor() {
 
   const [summary, setSummary] = useState<string>("");
 
+  const COMPRESSION_BYTES = 800 * 1024;
+
   async function processImages(html: string) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
@@ -34,21 +36,82 @@ export default function Editor() {
       const src = img.getAttribute('src');
       if (src && src.startsWith('data:')) {
         const blobPromise = fetch(src)
-          .then(res => res.blob())
+          .then(res => res.blob()) // data: URL -> Blob 변환
           .then(async (blob) => {
-            const file = new File([blob], `image${idx}.png`, { type: blob.type });
-            const imageRes = await ImageAPI.uploadImage(file, title, slug);
-            img.setAttribute('src', imageRes.url);
+            let fileToUpload: File; // 최종 업로드할 File 객체 (원본 또는 압축본)
+
+            //  이미지 크기 확인 및 조건부 압축
+            if (blob.size > COMPRESSION_BYTES) {
+              console.log(`Image ${idx} (${(blob.size / 1024).toFixed(2)} KB) is larger than threshold, compressing...`);
+
+              //  이미지 압축 및 리사이징 로직 (Canvas 사용)
+              const compressedBlob = await new Promise<Blob | null>((resolve) => {
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                  const imgElement = new Image();
+                  imgElement.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // 이미지 리사이징 
+                    const maxWidth = 1024;
+                    let { width, height } = imgElement;
+
+                    if (width > maxWidth) {
+                      height = Math.round(height * (maxWidth / width));
+                      width = maxWidth;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    ctx?.drawImage(imgElement, 0, 0, width, height);
+
+
+                    const outputFormat = 'image/jpeg'; // 압축률을 위해 jpeg 사용 (png는 무손실 압축)
+                    const compressionQuality = 0.7; // 0.7 또는 0.8 정도가 화질과 크기의 균형이 좋음
+
+                    canvas.toBlob(resolve, outputFormat, compressionQuality);
+                  };
+                  imgElement.src = event.target?.result as string;
+                };
+                reader.readAsDataURL(blob);
+              });
+
+              if (!compressedBlob) {
+                console.error("Image compression failed for image", idx);
+                // 압축 실패 시 원본 Blob을 사용하거나 에러 처리
+                fileToUpload = new File([blob], `image${idx}.png`, { type: blob.type }); // Fallback to original
+              } else {
+                console.log(`Image ${idx} compressed size: ${(compressedBlob.size / 1024).toFixed(2)} KB`);
+                // 압축된 Blob으로 새로운 File 객체 생성
+                const originalFilename = `image${idx}`;
+                const fileExtension = compressedBlob.type.split('/')[1] || 'jpeg'; // 압축 결과 타입 사용 또는 기본값
+                fileToUpload = new File([compressedBlob], `${originalFilename}.${fileExtension}`, { type: compressedBlob.type });
+              }
+
+            } else {
+              console.log(`Image ${idx} (${(blob.size / 1024).toFixed(2)} KB) is within limit, no compression needed.`);
+              // ✅ 압축 불필요, 원본 Blob으로 File 객체 생성
+              const originalFilename = `image${idx}`;
+              const fileExtension = blob.type.split('/')[1] || 'png'; // 원본 타입 사용 또는 기본값
+              fileToUpload = new File([blob], `${originalFilename}.${fileExtension}`, { type: blob.type });
+            }
+
+            // ✅ 최종 결정된 fileToUpload 객체를 사용하여 이미지 업로드 API 호출
+            const imageRes = await ImageAPI.uploadImage(fileToUpload, title, slug);
+            img.setAttribute('src', imageRes.url); // 업로드된 이미지 URL로 src 변경
             imageIds.push(imageRes.id);
+
+            console.log(`Image ${idx} uploaded URL: ${imageRes.url}`);
+
           })
-          .catch(err => console.error(err));
-        promises.push(blobPromise);
-        // console.log("Promise Pushed");
+          .catch(err => console.error("Image processing or upload failed:", err));
+        promises.push(blobPromise); // Promise 목록에 추가
       }
     });
-    // 모든 Promise 대기
+    // ... 모든 Promise 대기 및 결과 반환 ...
     await Promise.all(promises);
-    // 수정된 HTML 반환
 
     return {
       updatedHtml: doc.body.innerHTML,
