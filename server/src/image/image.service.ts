@@ -66,11 +66,14 @@ export class ImageService {
 
       await Deno.writeFile(filePath, new Uint8Array(bytes));
       this.logger.log(`파일 저장 완료 : ${dir + '/' + imageFileName}`);
+
+      const URL = domain === 'localhost' ? 'http://localhost:3000' : `https://${domain}`;
       // 3. 저장된 경로를 전달 후 Db에 저장
       const repoObj = {
         fileName: imageFileName,
         path: filePath,
-        url: `http://${domain}/image/${slug}/${imageFileName}.${fileType}`,
+        // url: `http://${domain}/image/${slug}/${imageFileName}.${fileType}`,
+        url: `${URL}/image/${slug}/${imageFileName}.${fileType}`,
       };
       const result = await this.repository.image.create({
         data: repoObj
