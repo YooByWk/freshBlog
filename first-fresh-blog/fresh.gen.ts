@@ -18,6 +18,7 @@ import * as $blog_index from "./routes/blog/index.tsx";
 import * as $deno_index from "./routes/deno/index.tsx";
 import * as $greet_name_ from "./routes/greet/[name].tsx";
 import * as $index from "./routes/index.tsx";
+import * as $AuthButtons from "./islands/AuthButtons.tsx";
 import * as $AuthEditor from "./islands/AuthEditor.tsx";
 import * as $Counter from "./islands/Counter.tsx";
 import * as $Editor from "./islands/Editor.tsx";
@@ -46,6 +47,7 @@ const manifest = {
     "./routes/index.tsx": $index,
   },
   islands: {
+    "./islands/AuthButtons.tsx": $AuthButtons,
     "./islands/AuthEditor.tsx": $AuthEditor,
     "./islands/Counter.tsx": $Counter,
     "./islands/Editor.tsx": $Editor,

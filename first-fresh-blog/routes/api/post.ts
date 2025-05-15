@@ -83,6 +83,12 @@ class PostAPIClass {
       throw new Error(`Failed to fetch post by slug: ${error}`);
     }
   }
+
+  async deletePostBySlug(slug: string) {
+    try {
+      await api(`post/detail/${slug}`, { method: "DELETE" });
+    } catch (err) { console.log(err); }
+  }
 }
 
 export const PostAPI = new PostAPIClass();

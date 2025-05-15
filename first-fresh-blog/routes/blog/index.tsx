@@ -6,6 +6,7 @@ import { LuSparkles as Sparkles } from "@preact-icons/lu";
 
 const IS_DEV = Deno.env.get("IS_DEV") === "true" ? true : false;
 const CACHE_DURATION = Deno.env.get("POST_CACHE_DURATION") ? parseInt(Deno.env.get("POST_CACHE_DURATION")!) : 1000 * 60 * 5; // 5분
+const SECRET = Deno.env.get("SECRET");
 
 const postListCache: {
   data: IPost[] | null,
@@ -46,12 +47,25 @@ export const handler: Handlers<IPost[] | { error: string; } | null> = {
       const errorMessage = (error instanceof Error) ? error.message : "알 수 없는 오류 발생";
       return ctx.render({ error: errorMessage }, { status: 500 });
     }
-  }
+  },
+
+  async POST(req, ctx) {
+    postListCache.data = null;
+    postListCache.timestamp = 0;
+
+    return new Response(JSON.stringify({ message: 'Cache invalidated successfully' }), {
+      status: 200, // 성공 상태 코드
+      headers: { "Content-Type": "application/json" },
+      statusText: "성공적으로 캐시를 초기화 함"
+    });
+  } // POST 핸들러
 };
+
+
 
 export default function Blog(props: PageProps<IPost[] | { error: string; } | null>) {
   const data = props.data;
-  console.log(data);
+  // console.log(data);
   // 에러 발생시 랜더
   if (data && typeof data === 'object' && 'error' in data) {
     return (

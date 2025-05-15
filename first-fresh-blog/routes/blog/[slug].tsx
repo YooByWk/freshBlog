@@ -5,6 +5,7 @@ import { PostAPI } from "../api/post.ts";
 import * as datetime from "@std/datetime";
 import { KoHeader } from "../../components/KoHeader.tsx";
 import DOMPurify from "npm:isomorphic-dompurify";
+import { AuthButtons } from "../../islands/AuthButtons.tsx";
 
 
 
@@ -80,9 +81,13 @@ export default function PostDetailPage(props: PageProps<IPost | { error: string;
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-20 min-h-screen">
 
         <div class="pt-16 mb-8 px-16"> {/* mb-8은 제목/메타와 내용 사이 간격 */}
-          <h1 class="text-4xl font-bold text-beige-900 dark:text-white mb-2 break-words"> {/* 제목 스타일 강화 */}
-            {post.title}
-          </h1>
+          <div class="flex flex-row justify-between">
+            <h1 class="text-4xl font-bold text-beige-900 dark:text-white mb-2 break-words"> {/* 제목 스타일 강화 */}
+              {post.title}
+            </h1>
+            <AuthButtons slug={post.slug} />
+          </div>
+
           <div class="text-sm text-beige-600 dark:text-zinc-500"> {/* 메타 정보 스타일 */}
             {post.createdAt && <p>작성일: {formattedDate}</p>}
             {formattedUpdatedAt && <p>수정일: {formattedUpdatedAt}</p>}
