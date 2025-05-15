@@ -4,7 +4,7 @@ import { SimpleAuthGuard } from '../auth/SimpleAuthGuard.guard.ts';
 // import { SimpleAuthGuard } from '../auth/SimpleAuthGuard.guard.ts';
 // @UseGuard(SimpleAuthGuard)
 
-
+const FRONT_URL = Deno.env.get("FRONT_URL");
 @Controller('post')
 export class PostController {
   constructor(
@@ -18,6 +18,10 @@ export class PostController {
   async create(@Body('post') post: any, @Body("imgIds") imgIds: (number | string)[]) {
     console.log(post.title, imgIds);
     console.log(123123);
+
+    const freshRes = await fetch(FRONT_URL + '/blog', { method: "POST" });
+    console.log(freshRes.statusText);
+
     return await this.postService.create(post, imgIds);
   }
 
@@ -41,6 +45,9 @@ export class PostController {
   async deleteBySlug(@Param('slug') slug: string) {
     const post = await this.postService.deleteBySlug(slug);
     this.logger.log(`${post.title} : Delete By Slug `);
+
+    const freshRes = await fetch(FRONT_URL + '/blog', { method: "POST" });
+    console.log(freshRes.status);
     return post;
   }
 } 
