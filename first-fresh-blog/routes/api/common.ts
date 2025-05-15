@@ -30,6 +30,16 @@ class CommonAPIClass {
   async getP(isServer = true): Promise<P> {
     return api('banger');
   }
+  async login(username: string, password: string) {
+    const payload = {
+      username,
+      password
+    }
+    return api('auth/login', {
+      method: "POST",
+      body: JSON.stringify(payload)
+    })
+  }
 }
 
 export const CommonAPI = new CommonAPIClass();

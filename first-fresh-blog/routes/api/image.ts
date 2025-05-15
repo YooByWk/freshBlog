@@ -1,4 +1,5 @@
 import { IS_BROWSER } from "$fresh/runtime.ts";
+import { getAuthToken } from "./auth.ts";
 
 interface RequestOptions extends RequestInit {
   headers?: Record<string, string>;
@@ -9,8 +10,17 @@ type FetchFunction = (url: string, options?: RequestOptions) => Promise<any>;
 export function createFetch(baseURL = "", defaultHeaders: Record<string, string> = {}): FetchFunction {
   return async function (url, options: RequestOptions = {}) {
     const fullURL = baseURL + url;
-    const headers = { ...defaultHeaders, ...options.headers };
+    let headers = { ...defaultHeaders, ...options.headers };
+    const token = getAuthToken();
+    if (token) {
+      headers = {
+        ...headers,
+        'Authorization': `Bearer ${token}`
+      };
+    }
+
     const config: RequestOptions = { ...options, headers };
+
 
     try {
       const res = await fetch(fullURL, config);
