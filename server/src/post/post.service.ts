@@ -1,11 +1,7 @@
 import { Inject, Injectable, Logger } from '@danet/core';
-import { PostRepository } from './post.repository.ts';
-import { POST_REPOSITORY } from '../constant.ts';
-import type { Repository } from '../database/repository.ts';
-import { PrismaService } from '../prisma/prisma.service.ts';
 
 import { PrismaClient } from "../generated/prisma/index.js";
-import type { Prisma, PrismaClient as TPrismaClient } from '../generated/prisma/index.d.ts';
+import type { Post, Prisma, PrismaClient as TPrismaClient } from '../generated/prisma/index.d.ts';
 import { PRISMA } from '../prisma/prisma.module.ts';
 
 
@@ -92,7 +88,30 @@ export class PostService {
     });
     return post;
   }
-  //
+  // 삭제하며 이미지도 물리적 제거할까...?
+  async deleteBySlug(slug: string) {
+    const post = await this.repository.post.findUnique({
+      where: {
+        slug
+      },
+      include: { images: true }
+    });
+    if (post) {
+      await this.repository.image.deleteMany({
+        where: {
+          post_id: post.id
+        }
+      });
 
+      const deletedPost = await this.repository.post.delete({
+        where: {
+          slug
+        }
+      });
+      return deletedPost;
+    } else {
+      throw new Error('Post not found');
+    }
+  }
   //
 }

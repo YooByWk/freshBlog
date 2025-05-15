@@ -39,10 +39,14 @@
     "jsr:@std/path@^1.0.6": "1.0.6",
     "jsr:@std/testing@1.0.3": "1.0.3",
     "npm:@prisma/client@^6.7.0": "6.7.0_prisma@6.7.0",
+    "npm:@types/node@*": "22.12.0",
     "npm:awesome-phonenumber@7.1.0": "7.1.0",
     "npm:drizzle-kit@*": "0.30.6_esbuild@0.19.12",
     "npm:drizzle-orm@*": "0.41.0_pg@8.14.1_@prisma+client@6.7.0__prisma@6.7.0_prisma@6.7.0",
     "npm:handlebars@4.7.7": "4.7.7",
+    "npm:hono@4.3.11": "4.3.11",
+    "npm:jose@5.9.6": "5.9.6",
+    "npm:jose@6.0.11": "6.0.11",
     "npm:path-to-regexp@6.2.1": "6.2.1",
     "npm:pg@*": "8.14.1",
     "npm:prisma@*": "6.7.0",
@@ -500,6 +504,12 @@
         "@prisma/debug"
       ]
     },
+    "@types/node@22.12.0": {
+      "integrity": "sha512-Fll2FZ1riMjNmlmJOdAyY5pUbkftXslB5DgEzlIuNaiWhXd00FhWxVC/r4yV/4wBb9JfImTu+jiSvXTkJ7F/gA==",
+      "dependencies": [
+        "undici-types"
+      ]
+    },
     "awesome-phonenumber@7.1.0": {
       "integrity": "sha512-i/pC5xvaNVrduufGtnw8O+abLWq70wd6YutiPYR2NqrnwtjBMk7rG/vJTktnAivSok+ZqlkFZzuVICgObpQi4w=="
     },
@@ -648,8 +658,17 @@
       ],
       "bin": true
     },
+    "hono@4.3.11": {
+      "integrity": "sha512-Hle1uNqJJKkebFkFEEWr3UAElJP922Xy0STfl8c+1PH1q+l6WrmhwAJFS6YH8ZWJY4z46qJtssbyVwwPm3dP5w=="
+    },
     "isexe@3.1.1": {
       "integrity": "sha512-LpB/54B+/2J5hqQ7imZHfdU31OlgQqx7ZicVlkm9kzg9/w8GKLEcFfJl/t7DCEDueOyBAD6zCCwTO6Fzs0NoEQ=="
+    },
+    "jose@5.9.6": {
+      "integrity": "sha512-AMlnetc9+CV9asI19zHmrgS/WYsWUwCn2R7RzlbJWD7F9eWYUTGyBmU9o6PxngtLGOiDGPRu+Uc4fhKzbpteZQ=="
+    },
+    "jose@6.0.11": {
+      "integrity": "sha512-QxG7EaliDARm1O1S8BGakqncGT9s25bKL1WSf6/oa17Tkqwi8D2ZNglqCF+DsYF88/rV66Q/Q2mFAy697E1DUg=="
     },
     "minimist@1.2.8": {
       "integrity": "sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA=="
@@ -763,6 +782,9 @@
     "uglify-js@3.19.3": {
       "integrity": "sha512-v3Xu+yuwBXisp6QYTcH4UbH+xYJXqnq2m/LtQVWKWzYc1iehYnLixoQDN9FH6/j9/oybfd6W9Ghwkl8+UMKTKQ==",
       "bin": true
+    },
+    "undici-types@6.20.0": {
+      "integrity": "sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg=="
     },
     "which@4.0.0": {
       "integrity": "sha512-GlaYyEb07DPxYCKhKzplCWBJtvxZcZMrL+4UkrTSJHHPyZU4mYYTv3qaOe77H7EODLSSopAUFAc6W8U4yqvscg==",

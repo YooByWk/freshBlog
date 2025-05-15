@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Context } from '@danet/core';
+import { Controller, Get, Post, Context, UseGuard } from '@danet/core';
 import { ImageService } from './image.service.ts';
 import type { HttpContext } from '@danet/core';
+import { SimpleAuthGuard } from '../auth/SimpleAuthGuard.guard.ts';
 
 
 @Controller('image')
@@ -28,6 +29,7 @@ export class ImageController {
 
   // formData를 받아야 함, 
   @Post()
+  @UseGuard(SimpleAuthGuard)
   async create(@Context() ctx: HttpContext) {
     const formData = await ctx.req.formData();
     const title = formData.get('title') as string;
